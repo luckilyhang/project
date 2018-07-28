@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://gw.alipayobjects.com/os/rmsportal/XQbQUStlgGlnVrWMZhrb.css" />
+    <link rel="stylesheet" href="css/LCalendar.css">
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        html {
+            overflow: scroll;
+        }
+        body{
+            background-color: #f5f5f5;
+        }
+        li{
+            list-style: none;
+        }
+        header{
+           position:fixed;
+            top:0;
+            left:0;
+            display:flex;
+            align-items: center;
+            width:100%;
+            height:40px;
+            background-color: #6aabf3;
+            z-index:11;
+        }
+        header img{
+            width:20px;
+            height:20px;
+            margin-left:10px;
+            margin-bottom:3px;
+        }
+        header>span{
+            text-align: center;
+            line-height: 40px;
+            color:#fff;
+            margin-left:20px;
+        }
+        section{
+            margin-top:40px;
+        }
+        section>.information{
+            display:flex;
+            justify-content: space-around;
+            width:100%;
+            height:80px;
+            background-color: #6aabf3;
+            align-items: center;
+            color:#ffffff;
+            text-align: center;
+
+        }
+        section>.information>.information-date{
+            overflow:scroll;
+            position: relative;
+            padding-right:7px;
+        }
+        section>.information>.information-date>img{
+            position: absolute;
+            bottom:0;
+            right:-4px;
+            width:20px;
+            height:20px;
+        }
+        .information-data{
+            background:#fff;
+            border-radius:10px;
+            margin-top:10px;
+            padding:0 50px;
+        }
+        .information-data ul li{
+            padding:6px 0;
+            display:flex;
+            justify-content: space-between;
+            border-bottom:1px dashed #6aabf3;
+        }
+        .chart-wrapper{
+           margin:0 auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <a href="home2.html"><img src="img/return.png" alt=""></a>
+    <span>浙江大学医学院附属妇产医院</span>
+</header>
+<section>
+    <!--顶部数据展示开始-->
+    <div class="information">
+        <div class="information-date" id="demo4" >
+            <p id="inf-nian">2018年</p>
+            <p id="inf-yue">05月</p>
+           <img src="img/col.png" alt="">
+        </div>
+        <div>
+            <p>本月工资</p>
+            <p>￥121,100.00</p>
+        </div>
+        <div>
+            <p>相比上个月</p>
+            <p>+￥500.00</p>
+        </div>
+
+    </div>
+    <!--顶部数据展示结束-->
+    <!--图表开始-->
+    <div class="chart-wrapper" >
+        <canvas id="mountNode"></canvas>
+    </div>
+    <!--图表结束-->
+    <!--点击饼状图，展示相应数据开始-->
+    <div class="information-data">
+        <ul>
+            <!--<li>-->
+                <!--<span>岗位工资</span>-->
+                <!--<span>1490.00</span>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<span>职务工资</span>-->
+                <!--<span>0.00</span>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<span>医院职务津贴</span>-->
+                <!--<span>0.00</span>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<span>薪级工资</span>-->
+                <!--<span>559.00</span>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<span>浮动工资</span>-->
+                <!--<span>35.00</span>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<span>省级直补</span>-->
+                <!--<span>190.00</span>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<span>保留津贴</span>-->
+                <!--<span>103.00</span>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<span>工改保留</span>-->
+                <!--<span>0.00</span>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<span>岗位津贴</span>-->
+                <!--<span>80.00</span>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<span>生活补贴</span>-->
+                <!--<span>170.00</span>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<span>同城岗贴</span>-->
+                <!--<span>110.00</span>-->
+            <!--</li>-->
+        </ul>
+    </div>
+    <!--点击饼状图，展示相应数据结束-->
+</section>
+<script src="js/LCalendar.js"></script>
+<!--<script src="js/rem.js"></script>-->
+
+<script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+<script>/*Fixing iframe window.innerHeight 0 issue in Safari*/document.body.clientHeight;</script>
+<script src="https://gw.alipayobjects.com/os/antv/assets/f2/3.2.0-beta.5/f2-all.min.js"></script>
+<script src="https://gw.alipayobjects.com/os/antv/assets/lib/jquery-3.2.1.min.js"></script>
+<script src="https://gw.alipayobjects.com/os/rmsportal/NjNldKHIVQRozfbAOJUW.js"></script>
+<script>
+    // 时间弹框开始
+    var calendarym = new LCalendar();
+    calendarym.init({
+        'trigger': '#demo4',
+        'type': 'ym',
+        'minDate': '2000-01',
+        'maxDate': (new Date().getFullYear()+10 )+ '-' + (new Date().getMonth() + 1)
+    });
+
+    // 时间弹框结束
+
+  //   var lcalendar_finish = document.querySelector(".lcalendar_finish");
+  //       lcalendar_finish.addEventListener('touchstart',dd);
+  // function dd( ){
+  //     alert(1)
+  // }
+
+    // 图表开始{}
+    var data={
+  data:[
+        {
+        "date":'201706',
+        "name": '工资',
+        "percent":5000,
+        "a": '1',
+        "shuju":[
+            {
+                "name":'岗位',
+                "percent": 2502
+            },
+            {
+                "name":'岗位',
+                "percent": 1490
+            },
+            {
+                "name":'职位',
+                "percent": 0
+            },
+            {
+                "name":'医院',
+                "percent": 0.00
+            },
+            {
+                "name":'薪金',
+                "percent": 559.00
+            },
+            {
+                "name":'升职',
+                "percent": 190.00
+            },
+            {
+                "name":'保留',
+                "percent": -103.00
+            },
+            {
+                "name":'工改',
+                "percent": 0.00
+            },
+            {
+                "name":'生活',
+                "percent": 170.00
+            },
+            {
+                "name":'同城',
+                "percent": -110.00
+            },
+            {
+                "name":'呼叫',
+                "percent": 0.00
+            },
+            {
+                "name":'呼叫铃',
+                "percent": 0.00
+            },
+            {
+                "name":'卫生',
+                "percent": 70.00
+            },
+            {
+                "name":'午餐',
+                "percent": 100.00
+            },
+
+        ]
+    }, {
+        "date":'201706',
+        "name": '劳务',
+        "percent":2688.95,
+        "a": '1',
+         "shuju":[
+                {
+                    "name":'劳务费',
+                    "percent": 2840.00
+                },
+                {
+                    "name":'专家门诊',
+                    "percent": 0.00
+                },
+                {
+                    "name":'业余门诊',
+                    "percent": 0.00
+                },
+                {
+                    "name":'其他',
+                    "percent":0.00
+                },
+                {
+                    "name":'未扣金额',
+                    "percent":-151.05
+                },
+                {
+                    "name":'劳务费',
+                    "percent": 2840.00
+                },
+            ]
+    }, {
+        "date":'201706',
+            "name": '福利',
+            "percent":0,
+            "a": '1',
+            "shuju":[
+                {
+                    "name":'停车费',
+                    "percent": 2840.00
+                },
+                {
+                    "name":'交通费',
+                    "percent": 0.00
+                },
+                {
+                    "name":'目标考核',
+                    "percent": 0.00
+                },
+                {
+                    "name":'冷饮费',
+                    "percent":0.00
+                },
+                {
+                    "name":'高温费',
+                    "percent":-151.05
+                },
+                {
+                    "name":'季度奖',
+                    "percent": 2840.00
+                },
+                {
+                    "name":'浙大岗位津贴',
+                    "percent": 2840.00
+                },
+                {
+                    "name":'计点型年终奖',
+                    "percent": 2840.00
+                },
+                {
+                    "name":'福利型年终奖',
+                    "percent": 2840.00
+                },
+                {
+                    "name":'月奖',
+                    "percent": 2840.00
+                },
+            ]
+    }, {
+            "date":'201706',
+            "name": '社保',
+            "percent":2653.05,
+            "a": '1',
+            "shuju":[
+                {
+                    "name":'公积金',
+                    "percent": 1280.00
+                },
+                {
+                    "name":'病假工资',
+                    "percent": 0.00
+                },
+                {
+                    "name":'养老金',
+                    "percent": 0.00
+                },
+                {
+                    "name":'卫生津贴扣款',
+                    "percent":706.40
+                },
+                {
+                    "name":'工会费',
+                    "percent":0.00
+                },
+                {
+                    "name":'午餐扣款',
+                    "percent":10.25
+                },
+                {
+                    "name":'医疗保险',
+                    "percent":0.00
+                },
+                {
+                    "name":'失业保险',
+                    "percent":90.33
+                },
+                {
+                    "name":'年金',
+                    "percent": 39.80
+                },
+                {
+                    "name":'补扣公积金',
+                    "percent":353.20
+                },
+                {
+                    "name":'补扣养老金',
+                    "percent": 0.00
+                },
+                {
+                    "name":'补扣公积金',
+                    "percent":0.00
+                },
+                {
+                    "name":'补扣医疗保险',
+                    "percent": 0.00
+                },
+                {
+                    "name":'补扣失业保险',
+                    "percent": 0.00
+                },
+                {
+                    "name":'补扣年金',
+                    "percent": 0.00
+                },
+                {
+                    "name":'其他扣款',
+                    "percent": 0.00
+                },
+                {
+                    "name":'工资税',
+                    "percent": 173.07
+                },
+            ]
+    }, {
+            "date":'201706',
+            "name": '其他',
+            "percent":0.00,
+            "a": '1',
+        "shuju":[
+                {
+                    "name":'夜班费',
+                    "percent": 0.00
+                },
+                {
+                    "name":'其他劳务',
+                    "percent": 0.00
+                }
+            ]
+    }],
+            data1:[
+                {
+                    "date":'201707',
+                    "name": '工资',
+                    "percent":9000,
+                    "a": '1',
+                    "shuju":[
+                        {
+                            "name":'岗位',
+                            "percent": 2502
+                        },
+                        {
+                            "name":'岗位',
+                            "percent": 1490
+                        },
+                        {
+                            "name":'职位',
+                            "percent": 0
+                        },
+                        {
+                            "name":'医院',
+                            "percent": 0.00
+                        },
+                        {
+                            "name":'薪金',
+                            "percent": 559.00
+                        },
+                        {
+                            "name":'升职',
+                            "percent": 190.00
+                        },
+                        {
+                            "name":'保留',
+                            "percent": -103.00
+                        },
+                        {
+                            "name":'工改',
+                            "percent": 0.00
+                        },
+                        {
+                            "name":'生活',
+                            "percent": 170.00
+                        },
+                        {
+                            "name":'同城',
+                            "percent": -110.00
+                        },
+                        {
+                            "name":'呼叫',
+                            "percent": 0.00
+                        },
+                        {
+                            "name":'呼叫铃',
+                            "percent": 0.00
+                        },
+                        {
+                            "name":'卫生',
+                            "percent": 70.00
+                        },
+                        {
+                            "name":'午餐',
+                            "percent": 100.00
+                        },
+
+                    ]
+                }, {
+                    "date":'201707',
+                    "name": '劳务',
+                    "percent":8000,
+                    "a": '1',
+                    "shuju":[
+                        {
+                            "name":'劳务费',
+                            "percent": 2840.00
+                        },
+                        {
+                            "name":'专家门诊',
+                            "percent": 0.00
+                        },
+                        {
+                            "name":'业余门诊',
+                            "percent": 0.00
+                        },
+                        {
+                            "name":'其他',
+                            "percent":0.00
+                        },
+                        {
+                            "name":'未扣金额',
+                            "percent":-151.05
+                        },
+                        {
+                            "name":'劳务费',
+                            "percent": 2840.00
+                        },
+                    ]
+                }, {
+                    "date":'201707',
+                    "name": '福利',
+                    "percent":11000,
+                    "a": '1',
+                    "shuju":[
+                        {
+                            "name":'停车费',
+                            "percent": 2840.00
+                        },
+                        {
+                            "name":'交通费',
+                            "percent": 0.00
+                        },
+                        {
+                            "name":'目标考核',
+                            "percent": 0.00
+                        },
+                        {
+                            "name":'冷饮费',
+                            "percent":0.00
+                        },
+                        {
+                            "name":'高温费',
+                            "percent":-151.05
+                        },
+                        {
+                            "name":'季度奖',
+                            "percent": 2840.00
+                        },
+                        {
+                            "name":'浙大岗位津贴',
+                            "percent": 2840.00
+                        },
+                        {
+                            "name":'计点型年终奖',
+                            "percent": 2840.00
+                        },
+                        {
+                            "name":'福利型年终奖',
+                            "percent": 2840.00
+                        },
+                        {
+                            "name":'月奖',
+                            "percent": 2840.00
+                        },
+                    ]
+                }, {
+                    "date":'201707',
+                    "name": '社保',
+                    "percent":13000,
+                    "a": '1',
+                    "shuju":[
+                        {
+                            "name":'公积金',
+                            "percent": 1280.00
+                        },
+                        {
+                            "name":'病假工资',
+                            "percent": 0.00
+                        },
+                        {
+                            "name":'养老金',
+                            "percent": 0.00
+                        },
+                        {
+                            "name":'卫生津贴扣款',
+                            "percent":706.40
+                        },
+                        {
+                            "name":'工会费',
+                            "percent":0.00
+                        },
+                        {
+                            "name":'午餐扣款',
+                            "percent":10.25
+                        },
+                        {
+                            "name":'医疗保险',
+                            "percent":0.00
+                        },
+                        {
+                            "name":'失业保险',
+                            "percent":90.33
+                        },
+                        {
+                            "name":'年金',
+                            "percent": 39.80
+                        },
+                        {
+                            "name":'补扣公积金',
+                            "percent":353.20
+                        },
+                        {
+                            "name":'补扣养老金',
+                            "percent": 0.00
+                        },
+                        {
+                            "name":'补扣公积金',
+                            "percent":0.00
+                        },
+                        {
+                            "name":'补扣医疗保险',
+                            "percent": 0.00
+                        },
+                        {
+                            "name":'补扣失业保险',
+                            "percent": 0.00
+                        },
+                        {
+                            "name":'补扣年金',
+                            "percent": 0.00
+                        },
+                        {
+                            "name":'其他扣款',
+                            "percent": 0.00
+                        },
+                        {
+                            "name":'工资税',
+                            "percent": 173.07
+                        },
+                    ]
+                }, {
+                    "date":'201707',
+                    "name": '其他',
+                    "percent":6000,
+                    "a": '1',
+                    "shuju":[
+                        {
+                            "name":'夜班费',
+                            "percent": 0.00
+                        },
+                        {
+                            "name":'其他劳务',
+                            "percent": 0.00
+                        }
+                    ]
+                }]
+    }
+    ;
+    // var dd=[];
+    // $.getJSON('https://www.easy-mock.com/mock/5b1695a069f2393736205f14/example/dd',function (data) {
+    //    var arr=data.data.shuju;
+    // console.log(data.data.shuju[0]);
+    // for(var i=0;i<arr.length;i++){
+    //     if(arr[i].date=="2018.06"){
+    //         dd=arr[i];
+    //     }
+    // }
+        var chart = new F2.Chart({
+            id: 'mountNode',
+            pixelRatio: window.devicePixelRatio
+        });
+
+
+    for(var key in data){
+        for(var i=0;i<data[key].length;i++){
+            if(data[key][i].date=="201706"){
+                console.log(data[key]);
+                obj=data[key]
+            }
+        }
+    }
+        chart.source(obj, {
+            percent: {
+                formatter: function formatter(val) {
+                    return val * 100 + '%';
+                }
+            }
+        });
+        chart.legend({
+            position: 'bottom',
+            offsetY: -5,
+            marker: 'square',
+            align: 'center',
+        });
+        chart.tooltip(false);
+        chart.coord('polar', {
+            transposed: true,
+            radius:1,
+            innerRadius: 0.618
+        });
+        chart.axis(false);
+        chart.interval().position('a*percent').color('name', ['#1890FF', '#13C2C2', '#2FC25B', '#FACC14', '#F04864', '#8543E0']).adjust('stack').style({
+            lineWidth: 1,
+            stroke: '#fff',
+            lineJoin: 'round',
+            lineCap: 'round'
+        });
+
+        var cc=  chart.guide().html({
+            position: ['50%', '50%'],
+            html: '<div id="show-text" style="text-align: center;width: 100px;height: 72px;vertical-align: middle;"> '+'<div id="show-record" style="display:block;line-height:30px;"><p>工资合计￥100000    </p></div>'+ '<p id="number" style="font-size: 17px;margin: 10px 10px 5px;font-weight: bold;"></p>' + '<p id="name" style="font-size: 12px;margin: 0;"></p>' + '</div>'
+        });
+        chart.interaction('pie-select', {
+            startEvent: 'tap',
+            animate: {
+                duration: 300,
+                easing: 'backOut'
+            },
+            onEnd: function onEnd(ev) {
+                var shape = ev.shape,
+                    data = ev.data,
+                    shapeInfo = ev.shapeInfo,
+                    selected = ev.selected;
+                if (shape) {
+                    if (selected) {
+                        $('#show-record').hide();
+                        var str='';
+                        for(var i=0;i<data.shuju.length;i++){
+                            str+='<li>';
+                            str+='<p>'+data.shuju[i].name+'</p>';
+                            str+='<p>'+data.shuju[i].percent+'</p>';
+                            str+='</li>';
+                        }
+                        $('ul').html(str);
+                        $('#number').css('color', shapeInfo.color);
+                        $('#number').text('￥'+data.percent);
+                        $('#name').text(data.name);
+                    } else {
+                        $('#number').text('');
+                        $('#name').text('');
+                    }
+                }
+            },
+
+
+        });
+        chart.render();
+        // 图表结束
+        // $('#show-text').html('呵呵');
+        // $('#show-text').css('line-height','100px')
+   // });
+
+</script>
+</body>
+</html>

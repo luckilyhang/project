@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Title</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #TabMain {
+            display:flex;
+            justify-content: space-between;
+        }
+        .tabItemContainer {
+            width:20%;
+
+        }
+        .tabBodyContainer {
+            width:80%;
+            background-color: #fff;
+            -webkit-border-radius: 0 5px 5px 0;
+            -moz-border-radius: 0 5px 5px 0;
+            border-radius: 0 5px 5px 0;
+            margin-left: 1px;
+        }
+        .tabItemContainer>li {
+            list-style: none;
+            text-align: center;
+        }
+        .tabItemContainer>li>a {
+            float: left;
+            width: 100%;
+            padding: 10px 0 10px 0;
+            font: 16px "微软雅黑", Arial, Helvetica, sans-serif;
+            color: #808080;
+            cursor: pointer;
+            text-decoration: none;
+            border:1px solid transparent;
+        }
+        .tabItemCurrent {
+            background-color: #fff;
+            border-left: 3px solid blue !important;
+            position: relative;
+        }
+        .tabItemContainer>li>a:hover {
+            color: #333;
+        }
+        .tabBodyItem {
+            position: absolute;
+            width: 290px;
+            display: none;
+        }
+        .tabBodyItem>p {
+            font: 13px "微软雅黑", Arial, Helvetica, sans-serif;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .tabBodyItem>p>a {
+            text-decoration: none;
+            color: #0F3;
+        }
+        .tabBodyCurrent{
+            display:block;
+        }
+    </style>
+</head>
+<body>
+<div class="tabItemContainer" style="position: fixed;top:0;left:0;">
+
+</div>
+<div id="TabMain">
+    <div class="tabItem" style="opacity: 0">
+        <!--<li><a class="tabItemCurrent">选项卡1</a></li>-->
+        <!--<li><a>选项卡2</a></li>-->
+        <!--<li><a>选项卡3</a></li>-->
+        <!--<li><a>选项卡4</a></li>-->
+        <!--<li><a>选项卡5</a></li>-->
+    </div>
+    <div class="tabBodyContainer">
+        <div class="tabBodyItem tabBodyCurrent">
+            <ul>
+                <li><h3>预算系统软件</h3></li>
+                <li><span>负责人: </span><span>蔡占英</span></li>
+                <li><span>子项目: </span><span>蔡占英</span></li>
+                <li><span>计划: </span><span>￥100000</span></li>
+                <li><span>拨入: </span><span>￥100000</span></li>
+                <li><span>支出: </span><span>￥100000</span></li>
+                <li><span>结余: </span><span>蔡占英</span></li>
+            </ul>
+        </div>
+        <div class="tabBodyItem">
+            <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>   <p>我是Tab选项卡2的内容</p>
+            <p></p>
+        </div>
+        <div class="tabBodyItem">
+            <p>我是Tab选项卡3的内容</p>
+            <p></p>
+        </div>
+        <div class="tabBodyItem">
+            <p>我是Tab选项卡4的内容</p>
+            <p></p>
+        </div>
+        <div class="tabBodyItem">
+            <p>我是Tab选项卡5的内容</p>
+            <p></p>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+<script>
+            $.ajax({
+                async: false,
+                type: "get",
+                dataType: 'json',
+                url: "http://120.27.217.7:7001/CCApplyWBS.asmx/WBS_GetProType",
+                success: function (data) {
+                    var arr=JSON.parse(data.data);
+                    console.log(arr)
+                    var str='';
+                    for(var i=0;i<arr.length;i++){
+                        str+='<li><a>'+arr[i].projectTypeName+'</a></li>';
+                    }
+                    $('.tabItemContainer').html(str);
+                    $(".tabItemContainer>li").click(function(){
+                        $(".tabItemContainer>li>a").removeClass("tabItemCurrent");
+                        $(".tabBodyItem").removeClass("tabBodyCurrent");
+                        $(this).find("a").addClass("tabItemCurrent");
+                        $($(".tabBodyItem")[$(this).index()]).addClass("tabBodyCurrent");
+                    });
+
+                },
+                error:function(){
+
+
+                }
+            })
+</script>
+</body>
+</html>
