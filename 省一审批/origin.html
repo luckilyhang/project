@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link href="css/Common/MuiCss/mui.min.css" rel="stylesheet" />
+    <link href="css/mui.indexedlist.css" rel="stylesheet" />
+    <style>
+        html,
+        body { height: 100%; overflow: hidden; }
+
+         .mui-search input[type=search]{
+	width:100% !important;	
+    }
+        .mui-bar { -webkit-box-shadow: none; box-shadow: none; }
+	.mui-table-view{cursor:pointer !important;}
+       .mui-indexed-list-search .mui-input-row .mui-search{
+       	    pointer-events: none !important;
+      }
+	.mui-input-clear .mui-indexed-list-search-input{
+		
+		-webkit-user-select:auto !important;
+       }
+    </style>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav">
+        <h1 class="mui-title">目的地列表</h1>
+    </header>
+    <div class="mui-content">
+        <div id='list' class="mui-indexed-list">
+
+      
+        <div class="mui-indexed-list-search mui-input-row mui-search" >
+         <input type="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索目的地">
+         </div>
+            <div class="mui-indexed-list-bar">
+                <a>#</a>
+                <a>A</a>
+                <a>B</a>
+                <a>C</a>
+                <a>D</a>
+                <a>E</a>
+                <a>F</a>
+                <a>G</a>
+                <a>H</a>
+                <a>I</a>
+                <a>J</a>
+                <a>K</a>
+                <a>L</a>
+                <a>M</a>
+                <a>N</a>
+                <a>O</a>
+                <a>P</a>
+                <a>Q</a>
+                <a>R</a>
+                <a>S</a>
+                <a>T</a>
+                <a>U</a>
+                <a>V</a>
+                <a>W</a>
+                <a>X</a>
+                <a>Y</a>
+                <a>Z</a>
+            </div>
+            <div class="mui-indexed-list-alert"></div>
+            <div class="mui-indexed-list-inner">
+                <div class="mui-indexed-list-empty-alert">没有数据</div>
+                <ul class="mui-table-view">
+
+                  
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="js/Common/ajax.js"></script>
+    <script src="js/Common/mui.min.js"></script>
+    <script src="js/Common/mui.indexedlist.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        mui.init();
+        mui.ready(function () {
+            var header = document.querySelector('header.mui-bar');
+            var list = document.getElementById('list');
+            //calc hieght
+            list.style.height = (document.body.offsetHeight - header.offsetHeight) + 'px';
+            //create
+            window.indexedList = new mui.IndexedList(list);
+
+
+            //mui.ajax('http://120.27.217.7:7001/CCApplyWBS.asmx/WBS_GetCCPlace ', {
+            //    dataType: 'json',//服务器返回json格式数据
+            //    type: 'get',//HTTP请求类型
+            //    success: function (data) {
+            //        var A = [];
+            //        var B = [];
+            //        var da = JSON.parse(data.data);
+            //        console.log(da)
+            //        console.log(da)
+            //        var temp = da[0].DCode;
+            //        var str = '';
+            //        var html = "";
+            //        html = '<li  data-group="' + temp + '" class="mui-table-view-divider mui-indexed-list-group">' + temp + '</li>';
+            //        for (var i = 0; i < da.length; i++) {
+            //            console.log(data[i])
+            //            if (da[i].DCode == temp) {
+            //                //<li data-value="AKU" data-tags="AKeSu" class="mui-table-view-cell mui-indexed-list-item">阿克苏酒店</li>
+            //                html += '<li  data-Id="' + da[i].AutoID + '" data-value="' + temp + '" data-tags="' + temp + '" class="mui-table-view-cell mui-indexed-list-item">' + da[i].DName + '</li>';
+            //                // <li data-group="A" class="mui-table-view-divider mui-indexed-list-group">A</li>
+            //                //      html+=''<li data-group='''+temp+'\" class=\"mui-table-view-divider mui-indexed-list-group'>A</li>';
+            //            } else {
+            //                temp = da[i].DCode;
+            //                html += '<li data-Id="' + da[i].AutoID + '" data-group="' + temp + '" class="mui-table-view-divider mui-indexed-list-group">' + temp + '</li>';
+            //            }
+            //        };
+            //        //常出差地
+            //        for (var i = 0; i < da.length; i++) {
+            //            if (da[i].AutoID == '287') {
+            //                str += '<li style="padding:0;"  data-Id="' + da[i].AutoID + '" data-value="' + temp + '" data-tags="' + temp + '" class="mui-table-view-cell mui-indexed-list-item">' + da[i].DName + '</li>';
+            //            } 
+            //        }
+
+
+            //        $('.Cq').html(str);
+
+              
+            //        $('.mui-table-view').html(html);
+            //        //点击传值
+            //        $(document).on('click', '.mui-table-view li', function () {
+            //            //目的地id
+            //            localStorage.setItem('MdId', $(this).attr('data-id'));
+            //            localStorage.setItem('Md', $(this).text());
+            //            //location.replace('demo.html');
+            //            window.history.back(-1);
+            //            return false;
+            //        })
+                  
+            //    }
+            //});
+
+
+        });
+    </script>
+</body>
+
+</html>
