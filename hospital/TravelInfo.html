@@ -1,0 +1,1082 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="css/Common/layer.css" rel="stylesheet" type="text/css">
+    <link href="css/Common/MuiCss/mui.min.css" rel="stylesheet" />
+    <title></title>
+
+    <script src="js/Common/layer.js"></script>
+    <script src="js/Common/mui.min.js"></script>
+    <style>
+        #TravelExpense {
+            padding-left: 1%;
+            padding-right: 5%;
+            padding-bottom: 5%;
+        }
+
+        .TravelExpense {
+            border: none;
+            margin-top: 3%;
+            padding-top: 2%;
+            padding-bottom: 2%;
+            padding-left: 5%;
+            background-color: white;
+            font-size: 80%;
+            border-radius: 8px;
+            color: #333;
+            box-shadow: 0px 0px 5px #DDDDDD;
+        }
+        ul li { 
+            list-style:none;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        .td_1 {
+            width: 45%;
+            font-size:17px;
+            padding-top:6px;
+        }
+        .td_2 {
+            font-size: 15px;
+        }
+        img {
+            width: 15%;
+        }
+        #confirm {
+            width: 100%;
+            margin-left: 0;
+            height:35px;
+            font-size:80%;
+        }
+        input {
+            border: none;
+            outline: none;
+        }
+
+        .button_next {
+            width: 90%;
+            height: 15%;
+        }
+
+        .button_confirm {
+        margin-top:20px;
+        }
+
+        .button_confirm input {
+            color: white;
+            width: 60%;
+            height: 28px;
+            margin-left: 18%;
+            margin-bottom: 5%;
+            border-radius: 50px;
+            background-color: #3295fa;
+            border: none;
+            outline: none;
+        }
+
+        #entourage table .td_1 {
+            padding-left: 5%;
+        }
+        input {
+            font-size: 100%;
+        }
+
+        #TravelExpense {
+            padding-bottom: 0;
+        }
+        input::-webkit-input-placeholder {
+            color: #999;
+        }
+    </style>
+</head>
+<body style="background-color:#f2f4f7;margin-left:4%;margin-right:5%;font-size:120%;height:100%;margin-right:0;margin-bottom:0;">
+    <div id="TravelExpense">
+        <div id="area1" class="TravelExpense">
+            <div style="width:30px;height:30px;float:left;left:0;margin-top:65px;position:absolute;z-index:2;background-color:#f2f4f7;border-radius:50%;"></div>
+            <div style="width:30px;height:30px;float:right;margin-top:65px;position:absolute;z-index:2;right:0;background-color:#f2f4f7;border-radius:50%;"></div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="td_1"><span>报销单号：</span></td>
+                        <td class="td_2"><span style="color:#999;">自动生成</span></td>
+                    </tr>
+                    <tr>
+                        <td class="td_1"><span>报销时间：</span></td>
+                        <td class="td_2"><span id="BXtime"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="td_1"><span>经办人员：</span></td>
+                        <td class="td_2"><span id="vName"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="td_1"><span>经办部门：</span></td>
+                        <td class="td_2"><span id="DepName"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="td_1"><span style="font-size:92%">职务/职称：</span></td>
+                        <td class="td_2"><span id="ZCName"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="td_1"><span>项目名称：</span></td>
+                        <td class="td_2"><span id="ProName"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="td_1"><span>出差事由：</span></td>
+                        <td class="td_2"><span id="CCReason"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="flows">
+        </div>
+        <div id="area2" class="TravelExpense">
+            <div style="width:30px;height:30px;float:left;left:0;margin-top:58px;position:absolute;z-index:2;background-color:#f2f4f7;border-radius:50%;"></div>
+            <div style="width:30px;height:30px;float:right;margin-top:58px;position:absolute;z-index:2;right:0;background-color:#f2f4f7;border-radius:50%;"></div>
+            <table>
+                <tbody>
+                    <!--<tr>
+                    <td class="td_1"><span>住宿实报：</span></td>
+                    <td class="td_2"><span id="vZS_Sum"></span></td>
+                </tr>
+                <tr>
+                    <td class="td_1"><span>报销总额：</span></td>
+                    <td class="td_2"><span id="ReMoney" style="color:#3295fa"></span></td>
+                </tr>-->
+                    <tr>
+                        <td class="td_1"><span>添加附件：</span></td>
+                    </tr>
+                    <tr>
+                        <td class="td_1" colspan="2" rowspan="2">
+                            <div class="sec-top">
+                                <div id="file_photo_pre" style="display:none;"></div>
+                                <div class="mui-collapse-content">
+                                    <div class="div-inner2" style="margin-top:5px;">
+                                        <a style="width:10%;" id="aimg_pre"><img src="img/tjfj@2x.png" alt="" style="transform:scale(0.8)"></a>
+                                        <div style="color:#A9A9A9;">申请附件</div>
+                                        <div id="selected_files_pred">
+                                            <!--<div style="margin-left:10px;position:relative;height:40px">
+                                            <img src="" onclick="showPhoto(this)" style="display:inline-block;line-height:30px;height:30px;margin-top:5px;">
+                                            <span onclick="showPhoto(this)" style="display:inline-block;position:absolute;height:40px;line-height:40px;margin-left:10px;">附件1</span>
+                                        </div>-->
+                                        </div>
+                                        <div id="selected_files_pre">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="sec-top">
+                                <div id="file_photo" style="display:none;"></div>
+                                <div class="mui-collapse-content">
+                                    <div class="div-inner2" style="margin-top:5px;">
+                                        <a style="width:10%;" id="aimg"><img src="img/tjfj@2x.png" alt="" style="transform:scale(0.8)"></a>
+                                        <div style="color:#A9A9A9;">发票附件</div>
+                                        <div id="selected_files">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="button_confirm">
+            <input id="confirm" type="button" value="提交" onclick="nextInfo()">
+        </div>
+
+    </div>
+    <div id="photoMask" class="imgBox" onclick="closePhoto()">
+        <img id="photoImg" src="" onclick="closePhoto()" style="transform: perspective(500px) matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" />
+    </div>
+    <input type="hidden" id="hidImgPathList" />
+    <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="js/Common/alloy_finger.js"></script>
+    <script src="js/Common/to.js"></script>
+    <script src="js/Common/transform.js"></script>
+    <script>
+        //出差事由
+        document.getElementById("CCReason").innerText = JSON.parse(localStorage.getItem("PreSQ")).CCReason;
+        //经办人员
+        document.getElementById("vName").innerText = JSON.parse(localStorage.getItem("PreSQ")).vName;
+        //职称
+        document.getElementById("ZCName").innerText = JSON.parse(localStorage.getItem("PreSQ")).ZCName;
+        //所在部门
+        document.getElementById("DepName").innerText = JSON.parse(localStorage.getItem("PreSQ")).DepName;
+        //项目名称
+        if (JSON.parse(localStorage.getItem("PreSQ")).ProjectTypeID=='0') {
+            document.getElementById("ProName").innerText = "医院经费（自筹）";
+        } else if (JSON.parse(localStorage.getItem("PreSQ")).ProjectTypeID == '1') {
+            document.getElementById("ProName").innerText = "科研经费";
+        } else if (JSON.parse(localStorage.getItem("PreSQ")).ProjectTypeID == '2') {
+            document.getElementById("ProName").innerText = "财政经费";
+        } else if (JSON.parse(localStorage.getItem("PreSQ")).ProjectTypeID == '3') {
+            document.getElementById("ProName").innerText = "其他经费";
+        }
+        //获取报销时间
+        function getNowFormatDate() {
+
+            var date = new Date();
+
+            var seperator1 = "-";
+            var month = date.getMonth() + 1;
+
+            var strDate = date.getDate();
+
+            if (month >= 1 && month <= 9) {
+
+                month = "0" + month;
+
+            }
+
+            if (strDate >= 0 && strDate <= 9) {
+
+                strDate = "0" + strDate;
+
+            }
+            var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
+            return currentdate;
+        }
+        //if (JSON.parse(localStorage.getItem("datas")).ZSRealMoney) {
+        //    document.getElementById("vZS_Sum").innerText = fmoney(JSON.parse(localStorage.getItem("datas")).ZSRealMoney);
+        //} else {
+        //    document.getElementById("vZS_Sum").innerText = fmoney(0,2);
+        //}
+       
+        var fujians = JSON.parse(localStorage.getItem("PreSQ")).ImgPathList.split(",");
+
+        var html = "";
+        for (var i = 0; i < fujians.length; i++) {
+            if (fujians[i]!="") {
+                html += '<div style="margin-left:10px;position:relative;height:40px">'
+                html += '<img src="' + "http://120.27.217.7:7001/CCImages/" + fujians[i] + '" onclick="showPhoto(this)" style="display:inline-block;line-height:30px;height:30px;margin-top:5px;">'
+                html += '<span onclick="showPhoto(this)" style="display:inline-block;position:absolute;height:40px;line-height:40px;margin-left:10px;">'+"附件"+(i+1)+'</span>'
+                html += '</div>';
+            }
+        }
+        document.getElementById("selected_files_pred").innerHTML = html;
+
+        var TrafficInfos = JSON.parse(localStorage.getItem("datas")).TrafficInfo;
+        var datas = JSON.parse(localStorage.getItem("datas"));
+        if (JSON.parse(localStorage.getItem("datas")).isPlan == '1') {
+            var gzf = 80;
+        } else {
+            var gzf = 40;
+        }
+        var html = '';
+        var ReMoney = 0;
+        html += '<div class="TravelExpense">'
+        html += '<div style="width:30px;height:30px;float:left;left:0px;margin-top:58px;position:absolute;z-index:2;background-color:#f2f4f7;border-radius:50%;"></div>'
+        html += '<div style="width:30px;height:30px;float:right;margin-top:58px;position:absolute;z-index:2;right:0px;background-color:#f2f4f7;border-radius:50%;"></div>'
+        html += ' <table>'
+        html += '   <tbody>'
+        html += ' <tr style="text-aligin:center">'
+        html += '        <td class="td_1"><span">报销总额：</span></td>'
+        html += '      <td class="td_2"><span id="ReMoney" style="color:#3295fa"></span></td>'
+        html += ' </tr>'
+        html += '      <tr>'
+        html += '            <td class="td_1"><span>' + datas.vName + '报销明细</span></td>'
+        html += '         </tr>'
+        html += '<tr>'
+        html += '<td class="td_1"><span>住宿实报：</span></td>'
+        if (JSON.parse(localStorage.getItem("datas")).ZSRealMoney) {
+            html += '<td class="td_2"><span id="vZS_Sum">' + fmoney(JSON.parse(localStorage.getItem("datas")).ZSRealMoney,2) + '</span></td>'
+        } else {
+            html += '<td class="td_2"><span id="vZS_Sum">' + fmoney(0,2) + '</span></td>'
+        }
+        html += '</tr>'
+        html += '     <tr>'
+        html += '         <td class="td_1"><span>交通实报：</span></td>'
+        html += '         <td class="td_2"><span id="DepName">' + fmoney(datas.realMoney,2) + '</span></td>'
+        html += '     </tr>'
+        html += '     <tr>'
+        html += '         <td class="td_1"<span>会务实报：</span></td>'
+        if (JSON.parse(localStorage.getItem("datas")).meetRealMoney) {
+            html += '         <td class="td_2"><span id="showUserPicker">' + fmoney(JSON.parse(localStorage.getItem("datas")).meetRealMoney,2) + '</span></td>'
+        } else {
+            html += '         <td class="td_2"><span id="showUserPicker">' + fmoney(0,2) + '</span></td>'
+        }
+        html += '     </tr>'
+        html += '     <tr>'
+        html += '         <td class="td_1"><span>伙食补助：</span></td>'
+        html += '         <td class="td_2"><span id="CCDate">' + fmoney(100 * JSON.parse(localStorage.getItem("datas")).CCDays,2) + '</span></td>'
+        html += '     </tr>'
+        html += '     <tr>'
+        html += '         <td class="td_1"><span style="font-size:96%">公&nbsp;&nbsp;杂&nbsp;&nbsp;费：</span></td>'
+        html += '         <td class="td_2"><span id="CCDays">' + fmoney(gzf * JSON.parse(localStorage.getItem("datas")).CCDays,2) + '</span></td>'
+        html += '     </tr>'
+        html += '     <tr>'
+        html += '         <td class="td_1"><span>报销小计：</span></td>';
+        //alert(JSON.parse(localStorage.getItem("datas")).ZSRealMoney);
+        if (JSON.parse(localStorage.getItem("datas")).meetRealMoney) {
+            if (JSON.parse(localStorage.getItem("datas")).ZSRealMoney) {
+                html += '         <td class="td_2"><span id="_vTmoney" style="color:#3295fa">' + fmoney(parseFloat(JSON.parse(localStorage.getItem("datas")).ZSRealMoney) + parseFloat(datas.realMoney) + parseFloat(JSON.parse(localStorage.getItem("datas")).meetRealMoney) + parseFloat(100 * JSON.parse(localStorage.getItem("datas")).CCDays) + parseFloat(gzf * JSON.parse(localStorage.getItem("datas")).CCDays), 2) + '</span></td>'
+            }else{
+                html += '         <td class="td_2"><span id="_vTmoney" style="color:#3295fa">' + fmoney(parseFloat(datas.realMoney) + parseFloat(JSON.parse(localStorage.getItem("datas")).meetRealMoney) + parseFloat(100 * JSON.parse(localStorage.getItem("datas")).CCDays) + parseFloat(gzf * JSON.parse(localStorage.getItem("datas")).CCDays), 2) + '</span></td>'
+            }
+        } else {
+            if (JSON.parse(localStorage.getItem("datas")).ZSRealMoney) {
+                html += '         <td class="td_2"><span id="_vTmoney" style="color:#3295fa">' + fmoney(parseFloat(JSON.parse(localStorage.getItem("datas")).ZSRealMoney) + parseFloat(datas.realMoney) + 0 + parseFloat(100 * JSON.parse(localStorage.getItem("datas")).CCDays) + parseFloat(gzf * JSON.parse(localStorage.getItem("datas")).CCDays), 2) + '</span></td>'
+            } else {
+                html += '         <td class="td_2"><span id="_vTmoney" style="color:#3295fa">' + fmoney(parseFloat(datas.realMoney) + 0 + parseFloat(100 * JSON.parse(localStorage.getItem("datas")).CCDays) + parseFloat(gzf * JSON.parse(localStorage.getItem("datas")).CCDays), 2) + '</span></td>'
+            }
+            
+        }
+
+        html += '     </tr>'
+        html += ' </tbody>'
+        html += '</table>'
+        html += '</div>'
+        //if (JSON.parse(localStorage.getItem("datas")).meetRealMoney) {
+        //    ReMoney += parseFloat(datas.realMoney) + parseFloat(JSON.parse(localStorage.getItem("datas")).meetRealMoney) + parseFloat(100 * JSON.parse(localStorage.getItem("datas")).CCDays) + parseFloat(gzf * JSON.parse(localStorage.getItem("datas")).CCDays);
+        //} else {
+        //    ReMoney += parseFloat(datas.realMoney) + parseFloat(100 * JSON.parse(localStorage.getItem("datas")).CCDays) + parseFloat(gzf * JSON.parse(localStorage.getItem("datas")).CCDays);
+        //}
+        if (JSON.parse(localStorage.getItem("datas")).meetRealMoney) {
+            if (JSON.parse(localStorage.getItem("datas")).ZSRealMoney) {
+                ReMoney += parseFloat(JSON.parse(localStorage.getItem("datas")).ZSRealMoney) + parseFloat(datas.realMoney) + parseFloat(JSON.parse(localStorage.getItem("datas")).meetRealMoney) + parseFloat(100 * JSON.parse(localStorage.getItem("datas")).CCDays) + parseFloat(gzf * JSON.parse(localStorage.getItem("datas")).CCDays)
+            } else {
+                ReMoney += parseFloat(datas.realMoney) + parseFloat(JSON.parse(localStorage.getItem("datas")).meetRealMoney) + parseFloat(100 * JSON.parse(localStorage.getItem("datas")).CCDays) + parseFloat(gzf * JSON.parse(localStorage.getItem("datas")).CCDays)
+            }
+        } else {
+            if (JSON.parse(localStorage.getItem("datas")).ZSRealMoney) {
+                ReMoney += parseFloat(JSON.parse(localStorage.getItem("datas")).ZSRealMoney) + parseFloat(datas.realMoney) + 0 + parseFloat(100 * JSON.parse(localStorage.getItem("datas")).CCDays) + parseFloat(gzf * JSON.parse(localStorage.getItem("datas")).CCDays)
+            }else{
+                ReMoney += parseFloat(datas.realMoney) + 0 + parseFloat(100 * JSON.parse(localStorage.getItem("datas")).CCDays) + parseFloat(gzf * JSON.parse(localStorage.getItem("datas")).CCDays)
+           }
+        }
+
+        
+        for (var i = 0; i < TrafficInfos.length; i++) {
+            Info = TrafficInfos[i];
+            html+='<div class="TravelExpense">'
+            html+='<div style="width:30px;height:30px;float:left;left:0px;margin-top:58px;position:absolute;z-index:2;background-color:#f2f4f7;border-radius:50%;"></div>'
+            html+='<div style="width:30px;height:30px;float:right;margin-top:58px;position:absolute;z-index:2;right:0px;background-color:#f2f4f7;border-radius:50%;"></div>'
+            html+=' <table>'
+            html+='   <tbody>'
+            html+='      <tr>'
+            html += '            <td class="td_1"><span>' + TrafficInfos[i].vName + '报销明细</span></td>'
+            html+='         </tr>'
+            html+='     <tr>'
+            html+='         <td class="td_1"><span>交通实报：</span></td>'
+            html += '         <td class="td_2"><span id="DepName">' +  fmoney(parseFloat(TrafficInfos[i].realMoney),2) + '</span></td>'
+            html+='     </tr>'
+            html+='     <tr>'
+            html += '         <td class="td_1"><span>会务实报：</span></td>'
+            if (JSON.parse(localStorage.getItem("datas")).meetRealMoney) {
+                html += '         <td class="td_2"><span id="showUserPicker">' + fmoney(JSON.parse(localStorage.getItem("datas")).meetRealMoney,2) + '</span></td>'
+            } else {
+                html += '         <td class="td_2"><span id="showUserPicker">' + fmoney(0,2) + '</span></td>'
+            }
+            html+='     </tr>'
+            html+='     <tr>'
+            html+='         <td class="td_1"><span>伙食补助：</span></td>'
+            html += '         <td class="td_2"><span id="CCDate">' + fmoney(100 * JSON.parse(localStorage.getItem("datas")).CCDays,2) + '</span></td>'
+            html+='     </tr>'
+            html+='     <tr>'
+            html+='         <td class="td_1"><span style="font-size:96%">公&nbsp;&nbsp;杂&nbsp;&nbsp;费：</span></td>'
+            html += '         <td class="td_2"><span id="CCDays">' + fmoney(gzf * JSON.parse(localStorage.getItem("datas")).CCDays,2)+ '</span></td>'
+            html+='     </tr>'
+            html+='     <tr>'
+            html += '         <td class="td_1"><span>报销小计：</span></td>';
+            if (JSON.parse(localStorage.getItem("datas")).meetRealMoney) {
+                html += '         <td class="td_2"><span id="CCAddress" style="color:#3295fa">' + fmoney(parseFloat(Info.realMoney) + parseFloat(JSON.parse(localStorage.getItem("datas")).meetRealMoney) + parseFloat(100 * JSON.parse(localStorage.getItem("datas")).CCDays) + parseFloat(gzf * JSON.parse(localStorage.getItem("datas")).CCDays),2) + '</span></td>'
+            } else {
+                html += '         <td class="td_2"><span id="CCAddress" style="color:#3295fa">' + fmoney(parseFloat(Info.realMoney) + 0 + parseFloat(100 * JSON.parse(localStorage.getItem("datas")).CCDays) + parseFloat(gzf * JSON.parse(localStorage.getItem("datas")).CCDays),2) + '</span></td>'
+            }
+          
+            html+='     </tr>'
+            html+=' </tbody>'
+            html+='</table>'
+            html += '</div>'
+            if (JSON.parse(localStorage.getItem("datas")).meetRealMoney) {
+                ReMoney += parseFloat(Info.realMoney) + parseFloat(JSON.parse(localStorage.getItem("datas")).meetRealMoney) + parseFloat(100 * JSON.parse(localStorage.getItem("datas")).CCDays) + parseFloat(gzf * JSON.parse(localStorage.getItem("datas")).CCDays);
+            } else {
+                ReMoney += parseFloat(Info.realMoney) + parseFloat(100 * JSON.parse(localStorage.getItem("datas")).CCDays) + parseFloat(gzf * JSON.parse(localStorage.getItem("datas")).CCDays);
+            }
+            
+        }
+        document.getElementById("flows").innerHTML = html;
+        document.getElementById("ReMoney").innerText = fmoney(ReMoney, 2);
+        //if (JSON.parse(localStorage.getItem("datas")).ZSRealMoney) {
+        //    document.getElementById("ReMoney").innerText = fmoney(ReMoney + parseFloat(JSON.parse(localStorage.getItem("datas")).ZSRealMoney),2);
+        //} else {
+        //    document.getElementById("ReMoney").innerText = fmoney(ReMoney,2);
+        //}
+      
+        $('#BXtime').html(getNowFormatDate());
+        //上传附件
+        $('#aimg_pre').on('click', function () {
+            var length = document.getElementById("selected_files_pre").children.length;
+            if (length == 3) {
+                tatle("限传3张图片！");
+                return;
+            }
+            var file = $('<input type="file"  accept="image/*" onchange="selectLocal_pre(this)" />');
+            $("#file_photo_pre").append(file);
+            file.click();
+        });
+
+        $('#aimg').on('click',function(){
+            var length = document.getElementById("selected_files").children.length;
+            if (length == 3) {
+                tatle("限传3张图片！");
+                return;
+            }
+            var file = $('<input type="file"  accept="image/*" onchange="selectLocal(this)" />');
+            $("#file_photo").append(file);
+            file.click();
+        });
+           
+        function selectLocal_pre(obj) {
+            var length = document.getElementById("selected_files_pre").children.length;
+            var file = obj.files[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function (e) {
+                if (file.size > 512000) { //500K
+                    dealImage(e.target.result, {
+                        width: 500, quality: 1
+                    }, function (base) {
+                        $("#selected_files_pre").append($('<div style="margin-left:10px;position:relative;height:40px"><img src="' + base + '"  onclick="showPhoto(this)" style="display:inline-block;line-height:30px;height:30px;margin-top:5px;"><span onclick="showPhoto(this)" style="display:inline-block;position:absolute;height:40px;line-height:40px;margin-left:10px;">' + "附件" + (length + 1) + '</span></img><input onclick="deleteFile(this)" type="button" value="删除" style="position:absolute;font-weight:900;transform:scale(0.8,0.8);font-size:15px;color:#7FBCFF;border:solid #7FBCFF 3px;border-radius:10px;float:right;position:absolute;right:0;" /></div>'));
+                    });
+                } else {
+                    $("#selected_files_pre").append($('<div style="margin-left:10px;position:relative;height:40px"><img src="' + e.target.result + '"  onclick="showPhoto(this)" style="display:inline-block;line-height:30px;height:30px;margin-top:5px;"><span onclick="showPhoto(this)" style="display:inline-block;position:absolute;height:40px;line-height:40px;margin-left:10px;">' + "附件" + (length + 1) + '</span></img><input onclick="deleteFile(this)" type="button" value="删除" style="position:absolute;font-weight:900;transform:scale(0.8,0.8);font-size:15px;color:#7FBCFF;border:solid #7FBCFF 3px;border-radius:10px;float:right;position:absolute;right:0;" /></div>'));
+                }
+            };
+        }
+
+        function selectLocal(obj) {
+            var length = document.getElementById("selected_files").children.length;
+            var file = obj.files[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function (e) {
+                if (file.size > 512000) { //500K
+                    dealImage(e.target.result, {
+                        width: 500, quality: 1
+                    }, function (base) {
+                        $("#selected_files").append($('<div style="margin-left:10px;position:relative;height:40px"><img src="' + base + '"  onclick="showPhoto(this)" style="display:inline-block;line-height:30px;height:30px;margin-top:5px;"><span onclick="showPhoto(this)" style="display:inline-block;position:absolute;height:40px;line-height:40px;margin-left:10px;">' + "附件" + (length + 1) + '</span></img><input onclick="deleteFile(this)" type="button" value="删除" style="position:absolute;font-weight:900;transform:scale(0.8,0.8);font-size:15px;color:#7FBCFF;border:solid #7FBCFF 3px;border-radius:10px;float:right;position:absolute;right:0;" /></div>'));
+                    });
+                } else {
+                    $("#selected_files").append($('<div style="margin-left:10px;position:relative;height:40px"><img src="' + e.target.result + '"  onclick="showPhoto(this)" style="display:inline-block;line-height:30px;height:30px;margin-top:5px;"><span onclick="showPhoto(this)" style="display:inline-block;position:absolute;height:40px;line-height:40px;margin-left:10px;">' + "附件" + (length + 1) + '</span></img><input onclick="deleteFile(this)" type="button" value="删除" style="position:absolute;font-weight:900;transform:scale(0.8,0.8);font-size:15px;color:#7FBCFF;border:solid #7FBCFF 3px;border-radius:10px;float:right;position:absolute;right:0;" /></div>'));
+                }
+            };
+        }
+        function showPhoto(obj) {
+            document.getElementById("photoMask").setAttribute("style", "position:fixed;top:0;left:0;width:100%;height:100%;background-color:black;z-index:99998;");
+            document.getElementById("photoImg").setAttribute("style", "position:fixed;top:0;left:0;z-index:99999;width:100%;height:100%;");
+            if (obj.src) {
+                document.getElementById("photoImg").setAttribute("src", obj.src);
+            } else {
+                document.getElementById("photoImg").setAttribute("src", obj.parentNode.firstElementChild.src);
+            }
+            document.getElementById("body").setAttribute("style", "overflow-y:hidden !important");
+        }
+
+        function closePhoto(obj) {
+            document.getElementById("photoMask").setAttribute("style", "display:none");
+            document.getElementById("photoImg").setAttribute("style", "display:none");
+            document.getElementById("body").setAttribute("style", "");
+        }
+
+        function deleteFile(obj) {
+            //先删除用户取消上传时空的input标签
+            var childrens = document.getElementById("file_photo").children;
+            var array = [];
+            for (var i = 0; i < childrens.length; i++) {
+                if (!childrens[i].files[0]) {
+                    array.push(childrens[i]);
+                }
+            }
+            for (var i = 0; i < array.length; i++) {
+                $(array[i]).remove();
+            }
+
+            //再删除选中要删除的input和img
+            var length = document.getElementById("selected_files").children.length;
+            //if (length == 2) {
+            //    document.getElementById("aimg").href = "123";
+            //} else {
+            //    document.getElementById("aimg").href = "#attachment";
+            //}
+            var fileName = obj.parentNode.innerText;
+            var n = parseInt(fileName.substring(fileName.length - 1, fileName.length));
+            $(obj).parent().remove();
+            var files = document.getElementById("file_photo").children;
+            for (var i = 0; i < files.length; i++) {
+                if (i + 1 == n) {
+                    $(files[i]).remove();
+                }
+            }
+            //图片被删除后重新命名
+            var divfiles = document.getElementById("selected_files").children;
+            for (var i = 0; i < divfiles.length; i++) {
+                divfiles[i].children[1].innerText = "附件" + (i + 1);
+            }
+        }
+
+        function dealImage(path, obj, callback) {
+            var img = new Image();
+            img.src = path;
+            img.onload = function () {
+                var that = this;
+                // 默认按比例压缩
+                var w = that.width,
+                 h = that.height,
+                 scale = w / h;
+                w = obj.width || w;
+                h = obj.height || (w / scale);
+                var quality = 0.7;  // 默认图片质量为0.7
+                //生成canvas
+                var canvas = document.createElement('canvas');
+                var ctx = canvas.getContext('2d');
+                // 创建属性节点
+                var anw = document.createAttribute("width");
+                anw.nodeValue = w;
+                var anh = document.createAttribute("height");
+                anh.nodeValue = h;
+                canvas.setAttributeNode(anw);
+                canvas.setAttributeNode(anh);
+
+                canvas.height = w;
+                canvas.width = h;
+                ctx.rotate(Math.PI / 2);
+                ctx.translate(0, -h);
+
+                ctx.drawImage(that, 0, 0, w, h);
+                // 图像质量
+                if (obj.quality && obj.quality <= 1 && obj.quality > 0) {
+                    quality = obj.quality;
+                }
+                // quality值越小，所绘制出的图像越模糊
+                var base64 = canvas.toDataURL('image/jpeg', quality);
+                // 回调函数返回base64的值
+                callback(base64);
+            }
+        }
+        //图片缩放和拖拽
+        var photoImg = document.getElementById("photoImg");
+        Transform(photoImg);
+        var initScale = 1;
+        new AlloyFinger(photoImg, {
+            pressMove: function (evt) {
+                photoImg.translateX += evt.deltaX;
+                photoImg.translateY += evt.deltaY;
+                evt.preventDefault();
+            },
+            multipointStart: function () {
+                initScale = photoImg.scaleX;
+            },
+            pinch: function (evt) {
+                photoImg.scaleX = photoImg.scaleY = initScale * evt.zoom;
+            }
+        });
+       
+
+        //提交报销单
+        function nextInfo(){
+            //confirm("确认提交吗?");
+            var datas = JSON.parse(localStorage.getItem('datas'));//报销填写页面数据
+////////////////////////填单人细节表
+            var PsnID = JSON.parse(localStorage.getItem("PreSQ")).ID;//填单人ID
+            var PsnName = document.getElementById("vName").innerText;//填单人姓名
+            var DepID = JSON.parse(localStorage.getItem("PreSQ")).projectDepID;//填单人部门ID 
+            var DepName = document.getElementById("DepName").innerText; //填单人部门名称
+            var IsZZCD = datas.originBear;//是否组织承担  
+            var ZWIndex = "";
+            var vBDate = JSON.parse(localStorage.getItem("PreSQ")).CFDate.split("T")[0];//填单人出发日期
+            var vEDate = JSON.parse(localStorage.getItem("PreSQ")).FHDate.split("T")[0];//填单人返回日期
+            var vDay = datas.CCDays;//出差天数
+            var vBPlace = "杭州";//填单人出发地
+            var vEPlace = JSON.parse(localStorage.getItem("PreSQ")).CCAddress;//填单人目的地   
+            var vZY = "";
+            var vPsnNum_N = 0;//出差人数（男）
+            for (var i = 0; i < datas.ScInfo.length;i++){
+                if (datas.ScInfo[i].sex=='1') {
+                    vPsnNum_N += 1;
+                }
+            }
+            var vPsnNum_Nv = datas.ScInfo.length - vPsnNum_N;//出差人数（女）
+            var vZSDay = "";//住宿天数
+            if (datas.ZSDays) {
+              vZSDay = datas.ZSDays;
+            }
+            vZSJS = "";//住宿间数
+            if (datas.roomNum) {
+               vZSJS = datas.roomNum; 
+            }
+            var vZS_FP = datas.ZSMoney;//住宿发票金额
+            var vZS_Sum = datas.ZSRealMoney = datas.ZSRealMoney ? datas.ZSRealMoney : 0; //住宿费实报
+            var vJT_HC_Type = "";//交通火车类型
+            if (JSON.parse(localStorage.getItem("PreSQ")).CFTraffic == "火车") {
+                vJT_HC_Type = datas.showTrainPicker; 
+            }
+            var vJT_HC_M = "";//交通火车（往）
+            var vJT_HC_M_F = "";//交通火车（返）
+            if(JSON.parse(localStorage.getItem("PreSQ")).CFTraffic == "火车"){
+                 vJT_HC_M = JSON.parse(localStorage.getItem("datas")).leaveMoney; 
+                 vJT_HC_M_F = JSON.parse(localStorage.getItem("datas")).leaveMoney; 
+            }
+            var vJT_TL = "";//超12小时补助
+            var vJT_LC_Type = "";//交通轮船类型
+            if (JSON.parse(localStorage.getItem("PreSQ")).CFTraffic == "轮船/汽车") {
+              vJT_LC_Type = datas.showTrainPicker; 
+            }
+            var vJT_LC_M = "";//轮船/汽车（往）
+            var vJT_LC_M_F = "";//轮船/汽车（返）
+            if (JSON.parse(localStorage.getItem("PreSQ")).CFTraffic == "轮船/汽车") {
+                vJT_LC_M = JSON.parse(localStorage.getItem("datas")).leaveMoney; 
+                vJT_LC_M_F = JSON.parse(localStorage.getItem("datas")).leaveMoney; 
+            }
+            var vJT_JP_DC_M = "";//机票（往）
+            var vJT_JP_LYC_M = "";//机票（返）
+            if (JSON.parse(localStorage.getItem("PreSQ")).CFTraffic == "飞机") {
+                vJT_JP_DC_M = JSON.parse(localStorage.getItem("datas")).leaveMoney;
+                vJT_JP_LYC_M = JSON.parse(localStorage.getItem("datas")).leaveMoney;
+            }
+
+
+            var vBJT_GJ = JSON.parse(localStorage.getItem("PreSQ")).CFTraffic;//交通工具（往）
+            var vBJTF = JSON.parse(localStorage.getItem("datas")).leaveMoney;//交通费（往）
+            var vEJT_GJ = JSON.parse(localStorage.getItem("PreSQ")).FHTraffic;;//交通工具（返）
+            var vEJTF = JSON.parse(localStorage.getItem("datas")).returnMoney;;//交通费（返）
+            var vJTF_M = JSON.parse(localStorage.getItem("datas")).realMoney;//交通实报
+            var HWF = JSON.parse(localStorage.getItem("datas")).meetRealMoney;//会务费实报
+            var HSF = 100 * JSON.parse(localStorage.getItem("datas")).CCDays;//伙食费
+            if (JSON.parse(localStorage.getItem("datas")).isPlan == '1') {
+                var gzf = 80;
+            } else {
+                var gzf = 40;
+            }
+            var GZF = gzf * JSON.parse(localStorage.getItem("datas")).CCDays;//公杂费
+            var vTmoney = document.getElementById("_vTmoney").innerText.replace(/￥/g, "").replace(/,/g, "");
+
+            var vJT_JP_Ot_M = "";
+            var vJT_Ot_M = "";//其他费用
+            var vJT_Sum = datas.realMoney;//交通费实报
+            var vHW_Index = "";//会务标准
+            var vHW_M = datas.meetMoney;//会务发票金额
+            var vHW_Sum = datas.meetRealMoney;//会务费实报
+            var vHS_Sum = "";//伙食补助
+            if(datas.ZSDays){
+                vHS_Sum = 100*datas.ZSDays;
+            }
+            var vGZ_Sum = "";//公杂费
+            if (datas.isPlan=='1') {
+                vGZ_Sum = 80 * datas.CCDays;
+            }else {
+                vGZ_Sum = 40 * datas.CCDays;
+            }
+            var vSum = ReMoney;//合计费用
+            var vYLD = "";//院领导住宿标准
+            var vZG = "";//正高住宿标准
+            var vOther = "";//其余人员住宿标准
+            var vYLD_JP = "";//院领导机票标准
+            var vZG_JP = "";//正高机票标准
+            var vOther_JP = "";//其他人员机票标准
+            var vBT_HS = "";
+            var vBT_GZ = "";
+            var iIndex = "";
+            var vHS_Sum_F = "";//伙食补助修改为
+            var vGZ_Sum_F = ""; //公杂费修改为
+            var vCCF_F = "";//车船费修改为
+            var vJPF_F = "";//机票费修改为
+            var vYLD_HC = "";//院领导火车标准
+            var vZG_HC = "";//正高火车标准
+            var vOther_HC = "";//其他人员火车标准
+            var vZSF_F = "";//住宿费修改为
+            var bYBBay = "";
+            var bYBBay_W = "";
+            var bCB_IsPX = datas.isPlan;//是否参加会议培训
+            var DID_List_Temp = "";//队员列表PsnID（在后面赋值了）
+
+////////////////////////随同人员表
+            if (localStorage.getItem("flows")) {
+                var flows = JSON.parse(localStorage.getItem("flows"));
+            } else {
+                var flows = [];
+            }
+            var datas = JSON.parse(localStorage.getItem("datas"));
+            var persons = [];
+            for (var i = 0; i < flows.length; i++) {
+                DID_List_Temp += JSON.parse(flows[i]).PersonID + ',';
+                persons.push({
+                    DetailID:JSON.parse(flows[i]).DetailID,
+                    PsnID: JSON.parse(flows[i]).PersonID,
+                    PsnName: JSON.parse(flows[i]).vName,
+                    DepID: JSON.parse(flows[i]).depCode,
+                    DepName: JSON.parse(flows[i]).depName,
+                    vBeginDate: datas.CCDate.split("--")[0],//出差时间
+                    vEndDate: datas.CCDate.split("--")[1],//截止时间
+                    vBeginPlace: '杭州',//出发地
+                    vEndPlace: datas.CCAddress,//出差地
+                    ZSF: '',//住宿费
+                    CCF: '',//车船费
+                    HSF: 100 * JSON.parse(localStorage.getItem("datas")).CCDays,//伙食费
+                    GZF: gzf * JSON.parse(localStorage.getItem("datas")).CCDays,//公杂费
+                    HWF: JSON.parse(localStorage.getItem("datas")).meetRealMoney,//会务培训费
+                    QTF: '',//其他费
+                    vZY: '',//摘要
+                    vOrder: 1,
+                    ZCName: JSON.parse(localStorage.getItem("datas")).ScInfo[i].zcName,
+                    vJT_HC_Type: JSON.parse(localStorage.getItem("datas")).TrafficInfo[i].SelectTraffic,//TrafficInfo
+                    vBJT_GJ: JSON.parse(localStorage.getItem("PreSQ")).CFTraffic,//交通工具(往)
+                    vEJT_GJ: JSON.parse(localStorage.getItem("PreSQ")).FHTraffic,//交通工具(返)
+                    vBJTF: JSON.parse(localStorage.getItem("datas")).TrafficInfo[i].leaveMoney,//交通费(往)
+                    vEJTF: JSON.parse(localStorage.getItem("datas")).TrafficInfo[i].returnMoney,//交通费(返)
+                    vJTF_M: JSON.parse(localStorage.getItem("datas")).TrafficInfo[i].realMoney,//交通费实报
+                    BTF: '',//补贴费
+                    vTmoney: parseFloat(JSON.parse(localStorage.getItem("datas")).TrafficInfo[i].realMoney) + parseFloat(JSON.parse(localStorage.getItem("datas")).meetRealMoney) + parseFloat(100 * JSON.parse(localStorage.getItem("datas")).CCDays) + parseFloat(gzf * JSON.parse(localStorage.getItem("datas")).CCDays)//报销总额
+                       
+                });
+            }
+            DID_List_Temp = DID_List_Temp.substring(0, DID_List_Temp.length - 1)
+            
+            
+ ////////////////////////主表
+            var UserID = JSON.parse(localStorage.getItem("PreSQ")).vCode;//填单人工号
+            var vDate = document.getElementById("BXtime").innerText;//填单日期
+            var cZJID = JSON.parse(localStorage.getItem("PreSQ")).ProjectTypeID;;
+            var cZJName = document.getElementById("ProName").innerText;
+            var RePsnID = JSON.parse(localStorage.getItem("PreSQ")).ID;
+            var RePsnName = document.getElementById("vName").innerText;
+            var cBurseDepID = JSON.parse(localStorage.getItem("PreSQ")).projectDepID;
+            var cBurseDepName = document.getElementById("DepName").innerText;
+            var ReMoney = document.getElementById("ReMoney").innerText.replace(/￥/g, "").replace(/,/g, "");
+            var Remark = "";//备注
+            var bComit = "";
+            var DD_UserId = localStorage.getItem('DD_UserId');
+            var DD_DepId = localStorage.getItem('DD_DepId');
+            var DD_deptManagerUseridList = localStorage.getItem('DD_deptManagerUseridList');
+            var CCID = JSON.parse(localStorage.getItem('PreSQ')).ID;
+            var obj = {};
+            var base64childrens = document.getElementById("selected_files").children;
+            //附件上传开始
+            childrens_pre = document.getElementById("file_photo_pre").children;
+            ImgCCPathList = "";
+            for (var i = 0; i < childrens_pre.length; i++) {
+                //后缀名
+                var FileExt = childrens_pre[i].files[0].name.split(".")[childrens_pre[i].files[0].name.split(".").length - 1];
+                var FileName = base64childrens[i].innerText + '.' + FileExt;
+                //文件
+                var FileContent = childrens_pre[i].files[0];
+                var formData = new FormData();
+                //formData.append("BxId", BxId);
+                formData.append("FileName", FileName);
+                formData.append("FileContent", childrens_pre[i].files[0]);
+                //console.log(formData.get('FileName'));
+                $.ajax({
+                    url: "http://120.27.217.7:7001/CCHandle.ashx?operKind=ReturnSaveImg",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    async: false,
+                    type: "post",
+                    dataType: "json",
+                    //cache: false,//上传文件无需缓存
+                    timeout: 900000,
+                    success: function (result) {
+                        //alert("成功");
+                        //imgLIst = result.data.fileName;
+                        if (result.success != "0") {
+                            mui.toast("附件上传失败，请重新上传！");
+                            return;
+                        } else {
+                            var arr = JSON.parse(result.data).fileName;
+                            ImgCCPathList = arr;
+                        }
+                    },
+                    error: function (e) {
+                        //alert(e.statusText);
+                        console.log(e);
+                        //mui.toast("出错了，请稍后再试！");
+                        return;
+                    }
+                });
+            }
+
+            childrens = document.getElementById("file_photo").children;
+            for (var i = 0; i < childrens.length; i++) {
+                //后缀名
+                var FileExt = childrens[i].files[0].name.split(".")[childrens[i].files[0].name.split(".").length - 1];
+                var FileName = base64childrens[i].innerText + '.' + FileExt;
+                //文件
+                var FileContent = childrens[i].files[0];
+                var formData = new FormData();
+                //formData.append("BxId", BxId);
+                formData.append("FileName", FileName);
+                formData.append("FileContent", childrens[i].files[0]);
+                //console.log(formData.get('FileName'));
+                $.ajax({
+                    url: "http://120.27.217.7:7001/CCHandle.ashx?operKind=ReturnSaveImg&flag=1",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    async: false,
+                    type: "post",
+                    dataType: "json",
+                    //cache: false,//上传文件无需缓存
+                    timeout: 900000,
+                    success: function (result) {
+                        //alert("成功");
+                        //imgLIst = result.data.fileName;
+                        if (result.success != "0") {
+                            mui.toast("附件上传失败，请重新上传！");
+                            return;
+                        } else {
+                            var arr = JSON.parse(result.data).fileName;
+                            $("#hidImgPathList").val(arr + "," + $("#hidImgPathList").val());
+                        }
+                    },
+                    error: function (e) {
+                        //alert(e.statusText);
+                        console.log(e);
+                        //mui.toast("出错了，请稍后再试！");
+                        return;
+                    }
+                });
+            }
+            //_imgList = listImg+
+            //附件上传结束
+            console.log($("#hidImgPathList").val());
+            obj.ImgCLFPathList = $("#hidImgPathList").val();
+            //console.log(obj);
+          
+
+            var kk = {
+                paramDetail: JSON.stringify({
+                    PsnID: PsnID,
+                    PsnName: PsnName,
+                    DepID: DepID,
+                    DepName: DepName,
+                    IsZZCD: IsZZCD,
+                    ZWIndex: ZWIndex,
+                    vBDate: vBDate,
+                    vEDate: vEDate,
+                    vDay: vDay,
+                    vBPlace: vBPlace,
+                    vEPlace: vEPlace,
+                    vZY: vZY,
+                    vPsnNum_N: vPsnNum_N,
+                    vPsnNum_Nv: vPsnNum_Nv,
+                    vZSDay: vZSDay,
+                    vZSJS: vZSJS,
+                    vZS_FP: vZS_FP,
+                    vZS_Sum: vZS_Sum,
+                    vJT_HC_Type: vJT_HC_Type,
+                    vJT_HC_M: vJT_HC_M,
+                    vJT_HC_M_F: vJT_HC_M_F,
+                    vJT_TL: vJT_TL,
+                    vJT_LC_Type: vJT_LC_Type,
+                    vJT_LC_M: vJT_LC_M,
+                    vJT_LC_M_F: vJT_LC_M_F,
+                    vJT_JP_DC_M: vJT_JP_DC_M,
+                    vJT_JP_LYC_M: vJT_JP_LYC_M,
+                    vJT_JP_Ot_M: vJT_JP_Ot_M,
+                    vJT_Ot_M: vJT_Ot_M,
+                    vJT_Sum: vJT_Sum,
+                    vHW_Index: vHW_Index,
+                    vHW_M: vHW_M,
+                    vHW_Sum: vHW_Sum,
+                    vHS_Sum: vHS_Sum,
+                    vGZ_Sum: vGZ_Sum,
+                    vSum: vSum,
+                    vYLD: vYLD,
+                    vZG: vZG,
+                    vOther: vOther,
+                    vYLD_JP: vYLD_JP,
+                    vZG_JP: vZG_JP,
+                    vOther_JP: vOther_JP,
+                    vBT_HS: vBT_HS,
+                    vBT_GZ: vBT_GZ,
+                    iIndex: iIndex,
+                    vHS_Sum_F: vHS_Sum_F,
+                    vGZ_Sum_F: vGZ_Sum_F,
+                    vCCF_F: vCCF_F,
+                    vJPF_F: vJPF_F,
+                    vYLD_HC: vYLD_HC,
+                    vZG_HC: vZG_HC,
+                    vOther_HC: vOther_HC,
+                    vZSF_F: vZSF_F,
+                    vTmoney: vTmoney,
+                    vBJT_GJ: vBJT_GJ,
+                    vBJTF: vBJTF,
+                    vEJT_GJ: vEJT_GJ,
+                    vEJTF: vEJTF,
+                    vJTF_M: vJTF_M,
+                    HWF: HWF,
+                    HSF: HSF,
+                    GZF: GZF,
+                    bYBBay: bYBBay,
+                    bYBBay_W: bYBBay_W,
+                    bCB_IsPX: bCB_IsPX,
+                    DID_List_Temp: DID_List_Temp,//队员列表PsnID
+                }),
+                paramPsn: JSON.stringify(persons),
+                paramMain: JSON.stringify({
+                    ImgCLFPathList: obj.ImgCLFPathList,
+                    UserID: UserID,
+                    vDate: vDate,
+                    cZJID: cZJID,
+                    cZJName: cZJName,
+                    RePsnID: RePsnID,
+                    RePsnName: RePsnName,
+                    cBurseDepID: cBurseDepID,
+                    cBurseDepName: cBurseDepName,
+                    ReMoney: ReMoney,
+                    Remark: Remark,
+                    bComit: bComit,
+                    DD_UserId: DD_UserId,
+                    DD_DepId: DD_DepId,
+                    DD_deptManagerUseridList: DD_deptManagerUseridList,
+                    ImgCCPathList: ImgCCPathList,
+                    CCID: CCID
+                })
+            }
+            var a = JSON.parse(kk.paramDetail)
+            var b = JSON.parse(kk.paramPsn)
+            var c = JSON.parse(kk.paramMain)
+            //return;
+            $.ajax({
+                async: false,
+                type: "post",
+                dataType: 'json',
+                data: {
+                    paramDetail: JSON.stringify({
+                        PsnID: PsnID,
+                        PsnName: PsnName,
+                        DepID: DepID,
+                        DepName: DepName,
+                        IsZZCD:IsZZCD,
+                        ZWIndex: ZWIndex,
+                        vBDate: vBDate,
+                        vEDate: vEDate,
+                        vDay: vDay,
+                        vBPlace: vBPlace,
+                        vEPlace: vEPlace,
+                        vZY: vZY,
+                        vPsnNum_N: vPsnNum_N,
+                        vPsnNum_Nv: vPsnNum_Nv,
+                        vZSDay: vZSDay,
+                        vZSJS: vZSJS,
+                        vZS_FP: vZS_FP,
+                        vZS_Sum: vZS_Sum,
+                        vJT_HC_Type: vJT_HC_Type,
+                        vJT_HC_M: vJT_HC_M,
+                        vJT_HC_M_F: vJT_HC_M_F,
+                        vJT_TL: vJT_TL,
+                        vJT_LC_Type:vJT_LC_Type,
+                        vJT_LC_M: vJT_LC_M,
+                        vJT_LC_M_F: vJT_LC_M_F,
+                        vJT_JP_DC_M: vJT_JP_DC_M,
+                        vJT_JP_LYC_M: vJT_JP_LYC_M,
+                        vJT_JP_Ot_M: vJT_JP_Ot_M,
+                        vJT_Ot_M:vJT_Ot_M,
+                        vJT_Sum: vJT_Sum,
+                        vHW_Index: vHW_Index,
+                        vHW_M: vHW_M,
+                        vHW_Sum: vHW_Sum,
+                        vHS_Sum: vHS_Sum,
+                        vGZ_Sum: vGZ_Sum,
+                        vSum: vSum,
+                        vYLD: vYLD,
+                        vZG: vZG,
+                        vOther: vOther,
+                        vYLD_JP: vYLD_JP,
+                        vZG_JP: vZG_JP,
+                        vOther_JP: vOther_JP,
+                        vBT_HS: vBT_HS,
+                        vBT_GZ: vBT_GZ,
+                        iIndex:iIndex,
+                        vHS_Sum_F: vHS_Sum_F,
+                        vGZ_Sum_F: vGZ_Sum_F,
+                        vCCF_F: vCCF_F,
+                        vJPF_F: vJPF_F,
+                        vYLD_HC: vYLD_HC,
+                        vZG_HC: vZG_HC,
+                        vOther_HC: vOther_HC,
+                        vZSF_F: vZSF_F,
+                        vTmoney: vTmoney,
+                        vBJT_GJ : vBJT_GJ,
+                        vBJTF : vBJTF,
+                        vEJT_GJ : vEJT_GJ,
+                        vEJTF : vEJTF,
+                        vJTF_M : vJTF_M,
+                        HWF : HWF,
+                        HSF : HSF,
+                        GZF: GZF,
+                        bYBBay: bYBBay,
+                        bYBBay_W: bYBBay_W,
+                        bCB_IsPX: bCB_IsPX,
+                        DID_List_Temp: DID_List_Temp,//队员列表PsnID
+                    }),
+                    paramPsn: JSON.stringify(persons),
+                    paramMain: JSON.stringify({
+                        ImgCLFPathList: obj.ImgCLFPathList,
+                        UserID: UserID,
+                        vDate: vDate,
+                        cZJID: cZJID,
+                        cZJName: cZJName,
+                        RePsnID: RePsnID,
+                        RePsnName: RePsnName,
+                        cBurseDepID: cBurseDepID,
+                        cBurseDepName: cBurseDepName,
+                        ReMoney: ReMoney,
+                        Remark: Remark,
+                        bComit: bComit,
+                        DD_UserId: DD_UserId,
+                        DD_DepId: DD_DepId,
+                        DD_deptManagerUseridList: DD_deptManagerUseridList,
+                        ImgCCPathList: ImgCCPathList,
+                        CCID: CCID
+                    })
+                },
+                url: "http://120.27.217.7:7001/CLFApply/WBS/CLFApply/CLFApplyWBS.asmx/WBS_SaveCLFInfo",
+                success: function (data) {
+                    if (data.success == "0") {
+                        tatle('保存成功');
+                        $('#confirm').attr('disabled',true);
+                    } else {
+                        console.log(data)
+                        tatle(data.msg);
+                        $('#confirm').attr('disabled', true);
+                    }
+                },
+                error: function (e) {
+                    console.log(e)
+                }
+            })
+          
+        }
+        //弹窗
+        function tatle(data) {
+            layer.open({
+                content: data
+                , skin: 'msg'
+               , time: 3 //2秒后自动关闭
+            });
+        }
+        //格式化金额
+        function fmoney(s, n) {
+            n = n > 0 && n <= 20 ? n : 2;
+            s = parseFloat((s + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";
+            var l = s.split(".")[0].split("").reverse(),
+            r = s.split(".")[1];
+            t = "";
+            for (j = 0; j < l.length; j++) {
+                t += l[j] + ((j + 1) % 3 == 0 && (j + 1) != l.length ? "," : "");
+            }
+            return "￥" + t.split("").reverse().join("") + "." + r;
+        }
+    </script>
+</body>
+</html>

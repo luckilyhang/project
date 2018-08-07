@@ -1,0 +1,305 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>出差事前申请单</title>
+    <link href="css/Common/MuiCss/mui.min.css" rel="stylesheet">
+    <link href="css/approve.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/Common/index.css">
+    <link href="css/Common/mobiscroll_003.css" rel="stylesheet" type="text/css">
+    <link href="css/Common/mobiscroll_002.css" rel="stylesheet" type="text/css">
+    <link href="css/Common/mobiscroll.css" rel="stylesheet" type="text/css">
+    <link href="css/Common/layer.css" rel="stylesheet" type="text/css">
+    <script>
+
+    </script>
+    <style>
+        * { 
+            margin:0;
+            padding:0;
+        }
+        a { 
+            color:#000;
+        }
+        li { 
+            list-style:none;
+        }
+        html body { height: 100%; overflow-x: hidden; overflow-y:scroll;margin: 0; }
+        body { background: #f5f5f5; }
+        section { 
+            width:90%;
+            /*background-color:#ccc;*/
+            margin:0 auto;
+            margin-top:10px;
+            border-radius:5px;
+        }
+        .sec-top { 
+            padding:5px 0;
+            background:#fff;
+
+        }.sec-top li span { margin: 0 0 0 20px; }
+        .sec-top li { 
+            margin-bottom:10px;
+        }
+            .sec-top  input { 
+                -webkit-user-select: auto !important; border: none; width: 61%; 
+                border:none; font-size: 15px; 
+
+            }
+            .sec-top li span { 
+                font-size:17px;
+                color:#666;
+            }
+        section .line { width: 100%; height: 15px; background-color: #f5f5f5; }
+
+      #sub{position:fixed;bottom:0;left:0; width: 100%; height: 40px; background-color:#3295fa;text-align:center;color:#fff;}
+        #yusuan li { font-size:15px; display: flex; justify-content: space-between; border-bottom: 1px dashed #3295fa; }
+            #yusuan li .YSleft { 
+                width:64%;
+            }
+            #yusuan li .YSright { width: 36%; }
+        .layui-m-layerchild h3 { height: 30px !important; line-height: 30px !important; }
+        .layui-m-layercont { overflow: auto; padding: 20px !important; }
+        .active { color:#00008d; }
+       .secion tr td { 
+            padding:6px;
+            padding-left:20px;
+        }
+        .secion tr td:nth-of-type(1) { display: inline-block; width: 40%; color: #666; }
+        .secion tr td:nth-of-type(2) { display: inline-block; width: 60%; }
+        #selected_files input{ 
+            width:20%;  
+        }
+        .se-pd input { 
+            background-color:red;                                                                                           
+            width:20px;
+        }
+    </style>
+</head>
+<body>  
+    <section id="content2">
+        <div class="sec-top sec-bottom">
+            <table border="0" style="width:100%" class="secion">
+                <tr>
+                    <td style="width:35%;"><span style="color:red">继教班出差</span></td>
+                    <td>
+                    <input style="width:10%;margin-right:5px;" type="radio" value="0" name="IsJJ">是
+                    <input style="width:10%;margin-right:5px;margin-left:10px;" type="radio" value="1" name="IsJJ">否
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:35%;"><span>出差人姓名</span></td>
+                    <td><input id="apply-name" type="type" placeholder="请输入姓名" /></td>
+                </tr>
+                <tr>
+                    <td style="width:35%;"><span>出差人工号</span></td>
+                    <td><input type="text" id="jobNum" placeholder="请输入工号" value="14140"/></td>
+                </tr>
+                <tr>
+                    <td style="width:35%;"><span>工作部门</span></td>
+                    <td><input type="type" id="apply-dept" placeholder="请输入部门" /></td>
+                </tr>
+                <tr>
+                    <td style="width:35%;"><span>联系电话</span></td>
+                    <td><input type="number" id="apply-iphone" placeholder="请输入联系电话" style="width:100%;" /></td>
+                </tr>
+                <tr>
+                    <td style="width:35%;"><span>身份证号</span></td>
+                    <td><input type="text" id="apply-SFZ" placeholder="请输入身份证号" style="width:100%"/></td>
+                </tr>
+                <tr>
+                    <td style="position:relative;padding-left:0 !important;">
+                        <font style="color: red; margin-left:7px;position: relative; top: 2px">*</font>
+                        <span style="margin-left:0;">
+                          职称/职务
+                        </span>
+                    </td>
+
+                    <td style="padding:4px;">
+                        <select id="apply-job" style="width:112px;font-size:15px;height:20px;margin-top:0;border:1px solid #f5f5f5;padding:0;margin-bottom:0;">
+                            <option value="院领导">院领导</option>
+                            <option value="正高">正高</option>
+                            <option value="中层干部">中层干部</option>
+                            <option value="其他人员">其他人员</option>
+                            <option value="请选择职称" selected>请选择职称</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span style="display:inline-block;">预算项目</span></td>
+                    <td style="padding-left:0;">
+                        <a href="slide.html">
+                            <span style="margin-left:0;display:inline-block;color:#999;font-size:15px;" id="plcItem">
+                                预算选择
+                            </span>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:35%;"><span>随从人员</span></td>
+                    <td><img src="img/tianjia@2x.png" style="width:10%;float:right;margin-right:20px" onclick="flowPeople()"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="flows_pre">
+                        </div>
+                    </td>
+                </tr>
+
+                    <!--<tr>
+                            <td><span style="display:inline-block;">预算项目</span></td>
+                            <td><a href="slide.html">
+            <span style="margin-left:0;display:inline-block;color:#999;font-size:15px;" id="plcItem">
+                预算选择
+            </span>
+        </a></td>
+                        </tr>-->
+</table>
+        </div> 
+        <div class="line"></div>
+        <div class="sec-top">
+            <table border="0" style="width:100%;" class="secion">
+                <tr>
+                    <td style="padding-left:0;width:40%;"><font style="color: red; margin-left:7px;position: relative; top: 2px">*</font><span> 出差目的地</span></td>
+                    <td ><a href="origin.html"><input type="text" id="apply-origin" placeholder="请选择出差目的地" style="width:100;" /></a></td>
+                </tr>
+                <tr>
+                    <td style="padding-left:0;"><font style="color: red; margin-left:7px;position: relative; top: 2px">*</font><span> 出差事由</span></td>
+                    <td><input type="type" id="apply-why" placeholder="请选择出差事由" style="width:100%;" /></td>
+                </tr>
+                <tr>
+                    <td style="padding-left:0;"><font style="color: red; margin-left:7px;position: relative; top: 2px">*</font><span> 出发日期</span></td>
+                    <td><input type="type" id="appDate" placeholder="请选择出发日期" style="width:100%;" /></td>
+                </tr>
+                <tr>
+                    <td style="padding-left:0;"><font style="color: red; margin-left:7px;position: relative; top: 2px">*</font><span> 出发交通</span></td>
+                    <td>
+                        <select id="traSelect" style="width:112px;font-size:14px;height:20px;margin-top:0;border:1px solid #f5f5f5;padding:0;margin-bottom:0;">
+                            <option value="value">飞机</option>
+                            <option value="value">火车</option>
+                            <option value="value">汽车</option>
+                            <option value="value">轮船</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-left:0;"><font style="color: red; margin-left:7px;position: relative; top: 2px">*</font><span> 返回日期</span></td>
+                    <td><input type="type" id="Time" placeholder="请选择返回日期" style="width:100%;" /></td>
+                </tr>
+                <tr>
+                    <td style="padding-left:0;">
+                        <font style="color: red; margin-left:7px;position: relative; top: 2px">*</font>
+                        <span> 返回交通</span>
+                    </td>
+
+                    <td>
+                        <select id="returnStyle" style="width:112px;font-size:14px;height:20px;margin-top:0;border:1px solid #f5f5f5;padding:0;margin-bottom:0;">
+                            <option value="value">飞机</option>
+                            <option value="value">火车</option>
+                            <option value="value">汽车</option>
+                            <option value="value">轮船</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <!--<tr>
+                    <td style="padding-left:0;"><font style="color: red; margin-left:7px;position: relative; top: 2px">*</font><span> 经费来源</span></td>
+                    <td class="se-pd">医院经费</td>
+                    <td class="se-pd"><input name="JFtype" type="radio" value="1" /></td>
+                </tr>-->
+                <!--<tr>
+                    <td></td>
+                    <td class="se-pd">科研经费</td>
+                    <td class="se-pd"><input name="JFtype" type="radio" value="2" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="se-pd">财政经费</td>
+                    <td class="se-pd"><input name="JFtype" type="radio" value="3" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="se-pd">其他经费</td>
+                    <td class="se-pd"><input name="JFtype" type="radio" value="4" /></td>
+                </tr>-->
+
+
+            </table>
+
+            </div>
+
+        <div class="line"></div>
+       
+        <div class="sec-top" style="margin-bottom:50px;padding-bottom:1px;">
+            <h5 style="font-size:16px;">会议培训通知或其他附件上传</h5>
+            <div id="file_photo" style="display:none;"></div>
+
+            <div class="mui-collapse-content">
+                <div class="div-inner2">
+                    <div style="display:flex;justify-content:space-around;align-items:center;">
+                        <a style="width:13%;" id="aimg"><img src="img/add.png"></a>
+                        <div style="color:red;width:80%;font-size:14px;">(请尽量上传附件，以免造成不必要的退回)</div>
+                    </div>
+                      <div style="color:#A9A9A9;">选择附件</div>
+                        <div id="selected_files" >
+                        </div>
+                </div>
+            </div>
+            <ul>
+                <li></li>
+            </ul>
+        </div> 
+    </section>
+    <input type="button" name="name" id="sub" value="提交" />
+    <!--<footer id="sub">
+       提交
+    </footer>-->
+    <div id="photoMask" class="imgBox" onclick="closePhoto()">
+        <img id="photoImg" src="" onclick="closePhoto()" style="transform: perspective(500px) matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" />
+    </div>
+    <input type="hidden" id="hidImgPathList" />
+    <!--内容部分结束-->
+    <!--<script src="js/Common/jquery.min.js"></script>-->
+    <script src="https://cdn.bootcss.com/jquery/1.7.2/jquery.min.js"></script>
+    <script src="js/Common/ajax.js"></script>
+    <script src="http://g.alicdn.com/dingding/open-develop/1.6.9/dingtalk.js"></script>
+    <script src="js/Common/mui.min.js"></script>
+    <script src="js/Common/layer.js"></script>
+    <script type="text/javascript" src="js/Common/date.js"></script>
+    <script src="js/Common/mobiscroll_002.js" type="text/javascript"></script>
+    <script src="js/Common/mobiscroll_004.js" type="text/javascript"></script>
+    <script src="js/Common/mobiscroll.js" type="text/javascript"></script>
+    <script src="js/Common/mobiscroll_003.js" type="text/javascript"></script>
+    <script src="js/Common/mobiscroll_005.js" type="text/javascript"></script>
+    <script src="js/Common/alloy_finger.js"></script>
+    <script src="js/Common/to.js"></script>
+    <script src="js/Common/transform.js"></script>
+    <script src="js/project.js"></script>
+    <script>
+        //存入工号
+        window.onload = function () {
+            localStorage.setItem("jobNum", document.getElementById("jobNum").value.substring(1));
+        }
+
+        function flowPeople() {
+
+            window.location = "FlowPeople.html?depid=" + DepID;
+        }
+        if (localStorage.getItem("flows_pre")) {
+            var flows_pre = JSON.parse(localStorage.getItem("flows_pre"));
+            var html = "";
+            for (var i = 0; i < flows_pre.length; i++) {
+                html += '<div data-all=\'' + flows_pre[i]  + '\'><span style="margin-left:10%;">' + JSON.parse(flows_pre[i]).name + '</span><img src="img/guanbi@2x.png" style="margin-left:5%" onclick="closePeople(this)"></div>'
+            }
+            document.getElementById("flows_pre").innerHTML = html;
+        }
+
+        function closePeople(ele){
+            $(ele.parentNode).remove();
+        }
+        console.log(flows_pre)
+    </script>
+</body>
+</html>

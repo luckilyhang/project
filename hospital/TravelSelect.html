@@ -1,0 +1,589 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link href="css/Common/MuiCss/mui.min.css" rel="stylesheet" />
+    <link href="css/mui.indexedlist.css" rel="stylesheet" />
+    <link href="css/Common/layer.css" rel="stylesheet" />
+    <script src="js/Common/layer.js"></script>
+    <script src="js/jquery-1.5.2.min.js"></script>
+    <script src="http://g.alicdn.com/dingding/open-develop/1.6.9/dingtalk.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .mui-search input[type=search] {
+            width: 100% !important;
+        }
+
+        .mui-bar {
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+
+        .mui-table-view {
+            cursor: pointer !important;
+            padding-bottom:100px !important;
+            background-color:#f2f4f7;
+        }
+
+        .mui-indexed-list-search .mui-input-row .mui-search {
+            pointer-events: none !important;
+        }
+
+        .mui-input-clear .mui-indexed-list-search-input {
+            -webkit-user-select: auto !important;
+        }
+        * {
+            -webkit-user-select: text;
+            -user-select: text;
+        }
+    </style>
+    <style>
+        .TravelSelect {
+            border: none;
+            margin-top: 3%;
+            padding-top: 2%;
+            padding-bottom: 2%;
+            padding-left: 5%;
+            background-color: white;
+            border-radius: 8px;
+            color: #333;
+            box-shadow: 0px 0px 5px #DDDDDD;
+        }
+
+        .TravelSelected {
+            margin-top: 3%;
+            padding-top: 2%;
+            padding-bottom: 2%;
+            padding-left: 5%;
+            background-color: #3295fa;
+            background: rgba(50,149,250,0.1);
+            border-radius: 8px;
+            color: #333;
+            box-shadow: 0px 0px 5px 0px #DDDDDD;
+        }
+
+        .TravelSelect > table {
+            width: 100%;
+        }
+
+        .TravelSelected > table {
+            width: 100%;
+        }
+
+        .td_1 {
+            width: 20%;
+        }
+
+        .td_2 {
+            width: 70%;
+        }
+
+        .button_next {
+            position:fixed;
+            left:0;
+            bottom:0;
+            width:100%;
+            background-color:#f2f4f7;
+            padding-top:5%;
+            padding-right: 6%;
+            padding-left:4%;
+        }
+
+        .button_next input {
+            display: inline-block;
+            height: 35px;
+            width: 100%;
+            margin-left: 0;
+            margin-right: 5%;
+            font-size: 110%;
+            margin-bottom: 5%;
+            border-radius: 50px;
+            background-color: #3295fa;
+            border: none;
+            outline: none;
+            color: white;
+        }
+
+        #TravelSelect {
+         
+            padding-left: 1%;
+            padding-right: 5%;
+            padding-bottom: 5%;
+        }
+
+        /*框架修改*/
+        .mui-table-view-cell {
+            background-color: #f2f4f7;
+            padding-top:0;
+            padding-bottom:0;
+            padding-right:6%;
+        }
+
+        .mui-content {
+            padding-top: 0 !important;
+        }
+
+        .mui-table-view-cell:after {
+            height: 0;
+        }
+        .mui-content {
+            margin-top:4%;
+        }
+        .mui-indexed-list-search {
+            margin-right: 4%;
+            margin-left: 4%;
+            border-radius: 5px;
+        }
+
+        #list {
+            background-color: #f2f4f7;
+            border:none;
+            position:fixed;
+            width:100%;
+            top:2%;
+        }
+
+        .mui-table-view:before {
+            height: 0;
+        }
+    </style>
+</head>
+<body style="overflow-y:scroll;background-color:#f2f4f7">
+    <header class="mui-bar mui-bar-nav" style="height:0">
+    </header>
+    <div class="mui-content">
+        <div id='list' class="mui-indexed-list">
+            <div class="mui-indexed-list-search mui-input-row mui-search">
+                <input type="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索">
+            </div>
+            <div class="mui-indexed-list-bar" style="display:none">
+                <!--<a>A</a>
+                <a>B</a>-->
+            </div>
+            <div class="mui-indexed-list-alert"></div>
+            <div class="mui-indexed-list-inner">
+                <div class="mui-indexed-list-empty-alert">没有数据</div>
+                <ul class="mui-table-view" style="padding-bottom:85px;"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="button_next">
+        <input id="innext" type="button" value="进入报销">
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="js/Common/ajax.js"></script>
+    <script src="http://g.alicdn.com/dingding/open-develop/1.6.9/dingtalk.js"></script>
+    <script src="js/Common/mui.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        mui.init();
+        mui.ready(function () {
+            var header = document.querySelector('header.mui-bar');
+            var list = document.getElementById('list');
+            //calc hieght
+            list.style.height = (document.body.offsetHeight - header.offsetHeight) + 'px';
+            //create
+            window.indexedList = new mui.IndexedList(list);
+        });
+
+
+        var DepID = DepID;
+        var userID = userID;
+        var deptManagerUseridList = deptManagerUseridList;
+        ////获取code
+        //dd.ready(function () {
+        //    dd.runtime.permission.requestAuthCode({
+        //        corpId: "ding1ac57d592aa1cbb235c2f4657eb6378f",
+        //        onSuccess: function (result) {
+        //            CODE = result.code;
+        //            $.ajax({
+        //                async: false,
+        //                type: "get",
+        //                dataType: 'json',
+        //                url: "http://120.27.217.7:7001/CCApplyWBS.asmx/WBS_GetDDUserID?code=" + CODE,
+        //                success: function (data) {
+        //                    user = data.userid
+        $.ajax({
+            async: false,
+            type: "get",
+            dataType: 'json',
+            url: url + "CCApplyWBS.asmx/WBS_GetDDUserInfo?userid=075327632426640112",
+            ////url: 'http://192.168.0.185:8009/CCApplyWBS.asmx/WBS_GetDDUserInfo?userid=075327632426640112',
+            success: function (data) {
+                console.log(data);
+                vCode = data.jobnumber;
+                var obj = data.isLeaderInDepts;
+                //DepID = obj.split(':')[0].substr(1);
+                userID = data.userid;
+                $.ajax({
+                    async: false,
+                    type: "get",
+                    dataType: 'json',
+                    url: 'http://120.27.217.7:7001/CCApplyWBS.asmx/WBS_GetDepListByUserID?userid=075327632426640112',
+                    success: function (data) {
+                        DepID = data.data;
+                        //console.log(DepID)
+                    }
+                })
+                //获取审批id和名字
+                arrId = [];
+                arrName = [];
+                $.ajax({
+                    async: false,
+                    type: "get",
+                    dataType: 'json',
+                    url: url + "CCApplyWBS.asmx/WBS_GetDDDepInfo?ID=" + DepID,
+                    //url: "http://192.168.0.185:8009/CCApplyWBS.asmx/WBS_GetDDDepInfo?ID=" + DepID,
+                    success: function (data) {
+
+                        //deptManagerUseridList = data.deptManagerUseridList
+                        if (data.deptManagerUseridList == '') {
+                            $.ajax({
+                                async: false,
+                                type: "get",
+                                dataType: 'json',
+                                url: url + "CCApplyWBS.asmx/WBS_GetDDDepInfo?ID=" + DepID,
+                                //url: "http://192.168.0.185:8009/CCApplyWBS.asmx/WBS_GetDDDepInfo?ID=" + DepID,
+
+                                success: function (data) {
+                                    //console.log(data)
+                                    deptManagerUseridList = data.parentid;
+                                }, error: function () {
+
+
+                                }
+                            })
+                        } else {
+                            deptManagerUseridList = data.deptManagerUseridList;
+                        }
+
+                    }, error: function () {
+
+                    }
+                })
+
+            }, error: function () {
+                //alert("不能访问数据")
+            }
+        });
+
+        //                }, error: function () {
+        //                    //alert("不能访问数据")
+        //                }
+        //            });
+        //        },
+        //        onFail: function (err) { }
+        //    });
+        //});
+
+        dd_obj = {};
+        dd_obj.DD_UserId = userID;
+        dd_obj.DD_DepId = DepID;
+        dd_obj.DD_deptManagerUseridList = deptManagerUseridList;
+        console.log(dd_obj);
+        localStorage.setItem('DD_UserId', userID);
+        localStorage.setItem('DD_DepId', DepID);
+        localStorage.setItem('DD_deptManagerUseridList', deptManagerUseridList);
+
+        //选择差旅费事前申请单
+        window.onload = function () {
+            var travelSelects = document.getElementsByClassName("mui-table-view")[0].children;
+            for (var i = 0; i < travelSelects.length; i++) {
+                if (travelSelects[i].firstElementChild.className == "TravelSelect") {
+                    travelSelects[i].firstElementChild.onclick = function () {
+                        for (var i = 0; i < travelSelects.length; i++) {
+                            if (travelSelects[i].className != "button_next") {
+                            travelSelects[i].firstElementChild.className = "TravelSelect";
+                            }
+                        }
+                        this.className = "TravelSelected";
+                    }
+                }
+            }
+
+            //进入报销
+            document.getElementById("innext").onclick = function () {
+                var travelSelected = document.querySelector(".TravelSelected");
+                if (!travelSelected) {
+                    tatle("请先选择事前申请单！");
+
+                    return;
+                }
+                localStorage.setItem("PreSQ", travelSelected.lastElementChild.innerText);//所有事前申请信息
+                //localStorage.setItem("ID", JSON.parse(travelSelected.lastElementChild.innerText).ID);
+                //localStorage.setItem("vName", JSON.parse(travelSelected.lastElementChild.innerText).vName);
+                //localStorage.setItem("DepName", JSON.parse(travelSelected.lastElementChild.innerText).DepName);
+                //localStorage.setItem("DepName", JSON.parse(travelSelected.lastElementChild.innerText).DepName);
+                //localStorage.setItem("CCReason", travelSelected.firstElementChild.firstElementChild.lastElementChild.lastElementChild.lastElementChild.innerText);
+                location.href = "TravelExpense.html?content=" + encodeURI(encodeURI(travelSelected.lastElementChild.innerText)) + "&CCDate=" + encodeURI(encodeURI(travelSelected.firstElementChild.firstElementChild.firstElementChild.lastElementChild.lastElementChild.innerText));
+            }
+        }
+
+        function tatle(data) {
+            layer.open({
+                content: data
+                , skin: 'msg'
+               , time: 3 //2秒后自动关闭
+            });
+        }
+    </script>
+
+    <script>
+        /**
+ * IndexedList
+ * 类似联系人应用中的联系人列表，可以按首字母分组
+ * 右侧的字母定位工具条，可以快速定位列表位置
+ * varstion 1.0.0
+ * by Houfeng
+ * Houfeng@DCloud.io
+ **/
+        (function ($, window, document) {
+            var $$ = jQuery.noConflict();
+            var classSelector = function (name) {
+                return '.' + $.className(name);
+            }
+            var IndexedList = $.IndexedList = $.Class.extend({
+                /**
+                 * 通过 element 和 options 构造 IndexedList 实例
+                 **/
+                init: function (holder, options) {
+                    var self = this;
+                    mui.ajax({
+                        async: false,
+                        type: "get",
+                        dataType: 'json',
+                        data: { param: JSON.stringify({ vCode: vCode }) },
+                        url: "http://120.27.217.7:7001/CLFApply/WBS/CLFApply/CLFApplyWBS.asmx/WBS_GetCCInfoList",
+                        success: function (data) {
+                            if (data.success == "0") {
+                                //console.log(data.data);
+                                //console.log(data.data.length);
+                                var travels = JSON.parse(data.data);
+                                console.log(travels);
+                                var html = "";
+                                for (var i = 0; i < travels.length; i++) {
+                                    html +='<li data-value="A" class="mui-table-view-cell">'
+                                    html += '<div class="TravelSelect">'
+                                    html += '<table>'
+                                    html += '<tbody>'
+                                    html += '<tr>'
+                                    html += '<td class="td_1"><span>出差时间：</span></td>'
+                                    html += '<td class="td_2"><span>' + travels[i].CFDate.split("T")[0].split("-")[0] + "/" + travels[i].CFDate.split("T")[0].split("-")[1] + "/" + travels[i].CFDate.split("T")[0].split("-")[2] + "--" + travels[i].FHDate.split("T")[0].split("-")[0] + "/" + travels[i].FHDate.split("T")[0].split("-")[1] + "/" + travels[i].FHDate.split("T")[0].split("-")[2] + '</span></td>'
+                                    html += '</tr>'
+                                    html += '<tr>'
+                                    html += '<td class="td_1"><span>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</span></td>'
+                                    html += '<td class="td_2"><span>' + travels[i].vName + '</span></td>'
+                                    html += '</tr>'
+                                    html += '<tr>'
+                                    html += '<td class="td_1"><span>部&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;门：</span></td>'
+                                    html += '<td class="td_2"><span>' + travels[i].DepName + '</span></td>'
+                                    html += '</tr>'
+                                    html += ' <tr>'
+                                    html += '<td class="td_1"><span>出差地点：</span></td>'
+                                    html += '<td class="td_2"><span>' + travels[i].CCAddress + '</span></td>'
+                                    html += '</tr>'
+                                    html += '<tr>'
+                                    html += '<td class="td_1"><span>出差事由：</span></td>'
+                                    html += '<td class="td_2"><span>' + travels[i].CCReason + '</span></td>'
+                                    html += '</tr>'
+                                    html += '</tbody>'
+                                    html += '</table>'
+                                    html += '<div style="display:none">' + JSON.stringify(travels[i]) + '</div>'
+                                    html += '</div>'
+                                    html +='</li>'
+                                }
+                                //html +=' <div class="button_next">'
+                                //html +='<input id="innext" type="button" value="进入报销">'
+                                //html += ' </div>'
+                                document.querySelector(".mui-table-view").innerHTML = html;
+                                self.init1(holder, options);
+                            } else {
+                                alert(data.msg);
+                            }
+                        },
+                        error: function (e) {
+                            //console.log(e)
+                        }
+                    });
+ 
+                },
+                init1: function (holder, options) {
+                    var self = this;
+                    self.options = options || {};
+                    self.box = holder;
+                    if (!self.box) {
+                        throw "实例 IndexedList 时需要指定 element";
+                    }
+                    self.createDom();
+                    self.findElements();
+                    self.caleLayout();
+                    self.bindEvent();
+                },
+                createDom: function () {
+                    var self = this;
+                    self.el = self.el || {};
+                    //styleForSearch 用于搜索，此方式能在数据较多时获取很好的性能
+                    self.el.styleForSearch = document.createElement('style');
+                    (document.head || document.body).appendChild(self.el.styleForSearch);
+                },
+                findElements: function () {
+                    var self = this;
+                    self.el = self.el || {};
+                    self.el.search = self.box.querySelector(classSelector('indexed-list-search'));
+                    self.el.searchInput = self.box.querySelector(classSelector('indexed-list-search-input'));
+                    self.el.searchClear = self.box.querySelector(classSelector('indexed-list-search') + ' ' + classSelector('icon-clear'));
+                    self.el.bar = self.box.querySelector(classSelector('indexed-list-bar'));
+                    self.el.barItems = [].slice.call(self.box.querySelectorAll(classSelector('indexed-list-bar') + ' a'));
+                    self.el.inner = self.box.querySelector(classSelector('indexed-list-inner'));
+                    self.el.items = [].slice.call(self.box.querySelectorAll(classSelector('indexed-list-item')));
+                    self.el.liArray = [].slice.call(self.box.querySelectorAll(classSelector('indexed-list-inner') + ' li'));
+                    self.el.alert = self.box.querySelector(classSelector('indexed-list-alert'));
+                },
+                caleLayout: function () {
+                    var self = this;
+                    var withoutSearchHeight = (self.box.offsetHeight - self.el.search.offsetHeight) + 'px';
+                    self.el.bar.style.height = withoutSearchHeight;
+                    self.el.inner.style.height = withoutSearchHeight;
+                    var barItemHeight = ((self.el.bar.offsetHeight - 40) / self.el.barItems.length) + 'px';
+                    self.el.barItems.forEach(function (item) {
+                        item.style.height = barItemHeight;
+                        item.style.lineHeight = barItemHeight;
+                    });
+                },
+                scrollTo: function (group) {
+                    var self = this;
+                    var groupElement = self.el.inner.querySelector('[data-group="' + group + '"]');
+                    if (!groupElement || (self.hiddenGroups && self.hiddenGroups.indexOf(groupElement) > -1)) {
+                        return;
+                    }
+                    self.el.inner.scrollTop = groupElement.offsetTop;
+                },
+                bindBarEvent: function () {
+                    var self = this;
+                    var pointElement = null;
+                    var findStart = function (event) {
+                        if (pointElement) {
+                            pointElement.classList.remove('active');
+                            pointElement = null;
+                        }
+                        self.el.bar.classList.add('active');
+                        var point = event.changedTouches ? event.changedTouches[0] : event;
+                        pointElement = document.elementFromPoint(point.pageX, point.pageY);
+                        if (pointElement) {
+                            var group = pointElement.innerText;
+                            if (group && group.length == 1) {
+                                pointElement.classList.add('active');
+                                self.el.alert.innerText = group;
+                                self.el.alert.classList.add('active');
+                                self.scrollTo(group);
+                            }
+                        }
+                        event.preventDefault();
+                    };
+                    var findEnd = function (event) {
+                        self.el.alert.classList.remove('active');
+                        self.el.bar.classList.remove('active');
+                        if (pointElement) {
+                            pointElement.classList.remove('active');
+                            pointElement = null;
+                        }
+                    };
+                    self.el.bar.addEventListener($.EVENT_MOVE, function (event) {
+                        findStart(event);
+                    }, false);
+                    self.el.bar.addEventListener($.EVENT_START, function (event) {
+                        findStart(event);
+                    }, false);
+                    document.body.addEventListener($.EVENT_END, function (event) {
+                        findEnd(event);
+                    }, false);
+                    document.body.addEventListener($.EVENT_CANCEL, function (event) {
+                        findEnd(event);
+                    }, false);
+                },
+                search: function (keyword) {
+                    var self = this;
+                    keyword = (keyword || '').toLowerCase();
+                    var selectorBuffer = [];
+                    var groupIndex = -1;
+                    var itemCount = 0;
+                    var liArray = self.el.liArray;
+                    var itemTotal = liArray.length;
+                    self.hiddenGroups = [];
+                    var checkGroup = function (currentIndex, last) {
+                        if (itemCount >= currentIndex - groupIndex - (last ? 0 : 1)) {
+                            selectorBuffer.push(classSelector('indexed-list-inner li') + ':nth-child(' + (groupIndex + 1) + ')');
+                            self.hiddenGroups.push(liArray[groupIndex]);
+                        };
+                        groupIndex = currentIndex;
+                        itemCount = 0;
+                    }
+                    liArray.forEach(function (item) {
+                        var currentIndex = liArray.indexOf(item);
+                        if (item.classList.contains($.className('indexed-list-group'))) {
+                            checkGroup(currentIndex, false);
+                        } else {
+                            var text = (item.innerText || '').toLowerCase();
+                            var value = (item.getAttribute('data-value') || '').toLowerCase();
+                            var tags = (item.getAttribute('data-tags') || '').toLowerCase();
+                            if (keyword && text.indexOf(keyword) < 0 &&
+                                value.indexOf(keyword) < 0 &&
+                                tags.indexOf(keyword) < 0) {
+                                selectorBuffer.push(classSelector('indexed-list-inner li') + ':nth-child(' + (currentIndex + 1) + ')');
+                                itemCount++;
+                            }
+                            if (currentIndex >= itemTotal - 1) {
+                                checkGroup(currentIndex, true);
+                            }
+                        }
+                    });
+                    if (selectorBuffer.length >= itemTotal) {
+                        self.el.inner.classList.add('empty');
+                    } else if (selectorBuffer.length > 0) {
+                        self.el.inner.classList.remove('empty');
+                        self.el.styleForSearch.innerText = selectorBuffer.join(', ') + "{display:none;}";
+                    } else {
+                        self.el.inner.classList.remove('empty');
+                        self.el.styleForSearch.innerText = "";
+                    }
+                },
+                bindSearchEvent: function () {
+                    var self = this;
+                    self.el.searchInput.addEventListener('input', function () {
+                        var keyword = this.value;
+                        self.search(keyword);
+                    }, false);
+                    $(self.el.search).on('tap', classSelector('icon-clear'), function () {
+                        self.search('');
+                    }, false);
+                },
+                bindEvent: function () {
+                    var self = this;
+                    self.bindBarEvent();
+                    self.bindSearchEvent();
+                }
+            });
+
+            //mui(selector).indexedList 方式
+            $.fn.indexedList = function (options) {
+                //遍历选择的元素
+                this.each(function (i, element) {
+                    if (element.indexedList) return;
+                    element.indexedList = new IndexedList(element, options);
+                });
+                return this[0] ? this[0].indexedList : null;
+            };
+
+        })(mui, window, document);
+
+
+    </script>
+</body>
+
+</html>

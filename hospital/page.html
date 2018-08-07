@@ -1,0 +1,137 @@
+﻿
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name='viewport' content=' initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no,target-densitydpi=device-dpi' />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!--<script src="js/Common/jquery.min.js"></script>-->
+    <script src="https://cdn.bootcss.com/jquery/1.7.2/jquery.min.js"></script>
+    <link href="css/Common/MuiCss/mui.min.css" rel="stylesheet">
+    <link href="css/mui.indexedlist.css" rel="stylesheet" />
+    <title>选择项目</title>
+    <style>
+        html,
+        body { height: 100%; overflow: hidden;overflow-y: scroll !important; }
+        .mui-bar { -webkit-box-shadow: none; box-shadow: none; }
+        #done.mui-disabled { color: gray; }
+        .mui-search .mui-placeholder { pointer-events: none; }
+        .proType_unSelected { height: 34px; line-height: 34px; background-color: #EFEFF4; }
+        .proType_selected { height: 34px; line-height: 34px; background-color: white; border-left: solid #156DCE 3px; color: #6D2229; font-weight: 900;position:fixed;left:0;padding-right:20px; }
+        .mui-table-view-cell:after { background-color: white; }
+        li { background-color: white; }
+        #contoctList { overflow: hidden; overflow: scroll; }
+        .mui-placeholder:last-child { position: relative; top: -30px; left: 40%; }
+        .mui-input-row.mui-search .mui-icon-clear { top: 4px; }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+       
+        <div class="mui-content">
+            <div id='list' class="mui-indexed-list" style="background-color:#EFEFF4;height:2000px">
+                <div style="position:fixed;top:44px;background-color:#EFEFF4;z-index:40;height:35px;">
+                    <div class="mui-indexed-list-search mui-input-row mui-search" style="height:28px;position:fixed;top:50px;right:10%;border:none;background-color:#EFEFF4;">
+                       
+                    </div>
+                </div>
+                <div id="proTypes" style="width:80px;background-color:white;text-align:center;margin-top:0px;">
+
+                </div>
+
+                <div class="mui-indexed-list-bar listIndex" style="display: none">
+                    <a>A</a>
+                </div>
+                <div class="mui-indexed-list-alert"></div>
+                <div class="mui-indexed-list-inner" style="left:80px;position:absolute;top:0;z-index:0;width:80%;">
+                    <div class="mui-indexed-list-empty-alert">没有数据</div>
+                    <ul class="mui-table-view" id="contoctList" style="background-color:#EFEFF4;margin-top:0px;position:absolute;left:0px;z-index:5000;"></ul>
+                </div>
+            </div>
+     
+        </div>
+        <script src="js/Common/ajax.js"></script>
+        <script src="js/Common/mui.min.js"></script>
+        <script src="js/mui.indexedlist_SelectPro.js"></script>
+        <script>
+            var user = JSON.parse(localStorage.getItem("user"));
+            console.log(user)
+            mui.init();
+            mui.ready(function () {
+                var header = document.querySelector('header.mui-bar');
+                var list = document.getElementById('list');
+                var done = document.getElementById('done');
+                //calc hieght
+                //list.style.height = (document.body.offsetHeight - header.offsetHeight) + 'px';
+                //create
+                window.indexedList = new mui.IndexedList(list);
+            });
+        </script>
+        <script>
+            //$(function () {
+            //    document.getElementById("back").href = document.referrer;
+            //});
+
+            $(document).on('click', '#contoctList li', function () {
+                localStorage.setItem('infoName', $(this).attr('data-value'));
+                localStorage.setItem('ProjectId', $(this).attr('data-ProjectDepID'));
+                history.go(-1);
+
+            })   
+            function conFirmSelect(obj) {
+                //window.location.replace('demo.html');
+                //$(this).attr('data-value');
+                //console.log($(this).attr('data-value'));
+
+                //var radio = document.getElementById('list').querySelector('input[type="radio"]:checked');//querySelector 选择器
+                //if (!radio && typeof (radio) != 'undefined' && radio != 0) {
+                //    mui.toast("请先选择项目");
+                //} else {
+                //    location.href = '../ExecuteSingle/ExecuteSingleEdit.aspx?projectDepID='+radio.value;
+                //}
+                //location.href = '../ExecuteSingle/ExecuteSingleEdit.aspx?projectDepID=' + $(obj).next().val();
+            }
+            //history.pushState(null, null, document.URL);
+        </script>
+
+        <script>
+            //每个项目分类的单击事件
+            function changeType(obj) {
+                var proTypes = document.getElementById("proTypes").children;
+                var currentType = obj.innerText;
+                var lis = document.getElementsByTagName("li");
+                if (obj.getAttribute("class") == "proType_unSelected") {
+                    obj.setAttribute("class", "proType_selected");
+                    for (var j = 0; j < proTypes.length; j++) {
+                        if (proTypes[j] != obj) {
+                            proTypes[j].setAttribute("class", "proType_unSelected");
+                        }
+                    };
+                    for (var i = 0; i < lis.length; i++) {
+                        if (lis[i].getAttribute("name") == currentType) {
+                            lis[i].setAttribute("style", "margin-top:10px;padding-right: 0px;");
+                        } else {
+                            lis[i].setAttribute("style", "display:none");
+                        }
+                    }
+                }
+            }
+        </script>
+        <script>
+            //项目筛选，单个区域的点击
+            console.log(localStorage.getItem('content1'));
+            //console.log(localStorage.getItem('content2'));
+            function fullSelect(obj) {
+                conFirmSelect(obj.firstElementChild.firstElementChild.children[7]);
+            }
+        </script>
+    </form>
+    <script>
+        //刷新gif
+        //window.onload = function () {
+        //    document.getElementsByClassName("fresh")[0].style.display = "none";
+        //}
+    </script>
+</body>
+</html>

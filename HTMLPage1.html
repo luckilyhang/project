@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        #content {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        span {
+            margin-right:30px;
+        }
+        #input {
+            width:100%;
+            height:80px;
+        }
+    </style>
+</head>
+<body>
+    <header class="mui-bar mui-bar-nav">
+        <span style="width:32%;display:inline-block;height:100%;line-height:44px;color:#3295fa" onclick="cancel()">取消</span>
+        <span style="display:inline-block;width:35%;text-align:center;height:100%;line-height:44px;">人员列表</span>
+        <span style="width:30%;display:inline-block;float:right;text-align:right;height:100%;line-height:44px;color:#3295fa" onclick="confirm()">确定</span>
+    </header>
+    <input type="text" placeholder='请输入文字开始筛选' id='input' />
+    <ul id="content">
+      
+    </ul>
+    <script src="https://cdn.bootcss.com/jquery/1.7.2/jquery.min.js"></script>
+    <script>
+
+        //获取输入框的值
+        var input = document.getElementById('input'),
+            //获取搜索内容
+            list = document.getElementById('content').getElementsByTagName('li');
+        //编写事件
+        url = 'http://120.27.217.7:7001/CLFApply/WBS/CLFApply/CLFApplyWBS.asmx/WBS_GetSTPsnList';
+        $.ajax({
+            type: "get",
+            dataType: 'json',
+            url: url,
+            success: function (data) {
+                var arr = JSON.parse(data.data);
+                console.log(arr)
+                var str = '';
+                for (var i = 0; i < arr.length;i++){
+                    str += '<li><span>' + arr[i].vCode+'</span>' + arr[i].vName+'</li>';
+                }
+                $('#content').html(str);
+                
+            },
+            error: function () {
+
+            }
+        })
+        //try {
+            //绑定按键事件
+            input.onkeyup = function () {
+                this.onchange();
+            };
+            //内容改变事件
+            input.onchange = function () {
+                var keyword = this.value;
+                for (var i = 0, len = list.length; i < len; i++) {
+                    if (list[i].innerHTML.indexOf(keyword) < 0) {
+                        list[i].style.display = 'none';
+                    } else {
+                        list[i].style.display = 'block';
+                    }
+                }
+            }
+        //}
+        //catch (ex) {
+
+        //}
+    </script>
+</body>
+</html>
