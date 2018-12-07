@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div>
     <ul class="liststyle">
       <li
@@ -59,7 +59,7 @@ export default {
         },
         {
           curd: 0,
-          name: "完结后放入我i"
+          name: "完结后放i"
         }
       ]
     };
