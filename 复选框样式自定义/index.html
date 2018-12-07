@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #awesome[type="checkbox"] + label::before {
+    content: "\a0";  /*不换行空格*/
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height:20px;
+    margin-right: .2em;
+    border-radius:20px;
+    background-color: #fff;
+    border:2px solid #3295fa;
+    text-align:center;
+    line-height:20px; 
+}
+#awesome {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+}
+#awesome[type="checkbox"]:checked + label::before {
+    content: "\2714";
+    color:#3295fa;
+    background-color:#fff;
+    border:2px solid #3295fa;
+}
+    </style>
+</head>
+
+<body>
+        <iframe src="demo.html" id="cc" style="display:none" frameborder="0" align="left"  scrolling="no"></iframe>
+    <input type="checkbox" id="awesome" checked="checked" />
+    <label for="awesome" onclick="sel()">全部选中</label>
+    <p id="dd">点击我显示嵌套页面</p>
+    <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+    <script>
+        var acor=false;
+        $('#dd').on('click',function(){
+            $('#cc').show();
+        })
+        function sel() {
+            console.log($('#awesome').attr('checked'));
+        }
+        // 伙食报销标准
+        function eat() {
+            if ('因公') {
+                if ('西藏' || '青海' || '新疆') {
+                    // 连续满12小时以上另加50
+                    if (总时长 / 12) {
+                        (n * 50) + 120
+                    } else {
+                        console.log(120)
+                    }
+                } else {
+                    console.log(100)
+                }
+            }
+        }
+        // 会议培训
+        if ('是会议培训' && date >= 2) {
+            eat()
+        }
+        // 公杂费 sum
+        //n 天数
+
+        function public(n) {
+            if ('安排车辆') {
+                sum = n * 40
+            } else if ('未安排车辆') {
+                sum = n * 80
+            } else if ('实习' || '挂职' || '支援') {
+                sum = 0
+            }
+        }
+        // 会议培训
+        if ('是会议培训' && date >= 2) {
+            public(n)
+        }
+        // 特殊情况处理
+        function spec() {
+            if ('有讲课补贴' || '已享受补贴') {
+                sum = 0;
+                eat = 0;
+            }
+        }
+    </script>
+</body>
+
+
+</html>
