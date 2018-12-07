@@ -1,0 +1,71 @@
+1.ios按钮颜色不兼容 解决办法input[type=button], input[type=submit], input[type=file], button { 
+   cursor: pointer; -webkit-appearance: none; 
+}
+2.ios动态添加的元素点击无效 点击的父元素添加cursor:pointer
+3.rem 布局屏幕闪烁问题 解决方式：页面body添加visibility:hidden，在rem.js中添加
+setTimeout(showPage,100);
+function showPage() {
+    $('body').css({ 'visibility': 'visible' })
+ }
+4.自定义复选框按钮样式
+ <input type="checkbox" id="awesome"/>
+ <label for="awesome"">全部选中</label>
+ #awesome[type="checkbox"] + label::before {选中前样式
+    content: "\a0";  /*不换行空格*/
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height:20px;
+    margin-right: .2em;
+    border-radius:20px;
+    background-color: #fff;
+    border:2px solid #3295fa;
+    text-align:center;
+    line-height:20px;  /*行高不加单位，子元素将继承数字乘以自身字体尺寸而非父元素行高*/
+}
+#awesome {//隐藏原有的input框
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+}
+#awesome[type="checkbox"]:checked + label::before {//选中后样式
+    content: "\2714";
+    color:#3295fa;
+    background-color:#fff;
+    border:2px solid #3295fa;
+}
+5.移动端吸顶效果
+ .sticky { position: -webkit-sticky; position: sticky; top: 0; left: 0; z-index: 9999; }
+ .fixed-top { position: fixed; width: 100%; left: 0; top: 0; }
+       //判断安卓或ios
+        var stickyEl = document.querySelector('.scrol');
+//要吸顶的dom
+      function fixed(num) {
+            var u = navigator.userAgent;
+
+            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+ 
+            var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+            
+	if (isAndroid) {
+                document.body.onscroll = function (e) {
+                    var scrollT = document.body.scrollTop;
+
+                    if (scrollT > num) {
+                        $(stickyEl).addClass('fixed-top');
+                    } else {
+                        $(stickyEl).removeClass('fixed-top');
+                    }
+                };
+            } else if (isiOS) {
+                $(stickyEl).addClass('sticky');
+
+                console.log(11);
+            }
+        }
+      
+  	fixed(50);
+
+
+解决ios移动端头部与顶部固定定位后，小键盘顶起固定定位的元素
+给中间最外层div设置position: fixed; top:3.3rem; bottom: 3rem; width: 100%; overflow: scroll; 
+top为顶部div高，bottom为底部div的高
