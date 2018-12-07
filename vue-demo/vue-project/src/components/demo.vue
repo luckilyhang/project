@@ -59,7 +59,7 @@ export default {
         },
         {
           curd: 0,
-          name: "完结后放i"
+          name: "完结后放i司空见惯覅上刚覅u树"
         }
       ]
     };
