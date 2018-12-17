@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
-import store from './vuex/store.js'
+// import store from './vuex/store.js'
 Vue.use(MintUI)
 Vue.config.productionTip = false
 
@@ -13,10 +13,10 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  store,
+  // store,
   components: { App },
   template: '<App/>',
-  data:{
-    eventHub:new Vue()   // 在main.js设置所有组件都能用调用
- },
+//   data:{
+//     eventHub:new Vue()   // 在main.js设置所有组件都能用调用
+//  },
 })

@@ -1,8 +1,8 @@
 {
-  "name": "project",
+  "name": "vue-project",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "",
+  "author": "luckilyhang <32730998+luckilyhang@users.noreply.github.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -10,15 +10,12 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "lib-flexible": "^0.3.2",
     "mint-ui": "^2.2.13",
-    "moment": "^2.22.2",
-    "raf.js": "^0.0.4",
     "vue": "^2.5.2",
-    "vue-lazyload": "^1.2.6",
+    "vue-photo-preview": "^1.1.2",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1",
-    "vux": "^2.9.2"
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -44,6 +41,7 @@
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.8",
     "postcss-url": "^7.2.1",
+    "px2rem-loader": "^0.1.9",
     "rimraf": "^2.6.0",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",

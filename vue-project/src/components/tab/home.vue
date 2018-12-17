@@ -31,21 +31,6 @@
       </mt-swipe>
       <p @click="increment">增加</p>{{number}}
       <p @click="apart">减少</p>
-      <!-- <input type="checkbox" v-model="check" value="html" id="ht">  
-      <label for="ht"></label>
-      <input type="checkbox" v-model="check"  value="css" id="cs">  
-      <label for="cs"></label>
-      <input type="checkbox" v-model="check"  value="js" id="js">  
-      <label for="js"></label> -->
-
-
-      <select name="" v-model="check" id="">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-      </select>
-    {{check}}
-
     </div>
     <tab-bar></tab-bar>
   </div>
@@ -60,9 +45,7 @@ export default {
     mint
   },
   data() {
-    return {
-      check:['1','2']
-    };
+    return {};
   },
   computed: {
     ...mapState(["number"])

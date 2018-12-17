@@ -12,9 +12,9 @@ export default {
         }
     },
     created(){
-        this.$root.eventHub.$on("eventName",(tar)=>{
-            this.fn(tar)
-        })
+        // this.$root.eventHub.$on("eventName",(tar)=>{
+        //     this.fn(tar)
+        // })
     },
     methods:{
     fn:function(tar){

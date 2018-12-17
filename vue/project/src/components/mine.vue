@@ -25,9 +25,9 @@ export default {
         sel(val){
             console.log(val)
         },
-        author(){
-         this.datas= this.$store.state.author
-        }
+        // author(){
+        //  this.datas= this.$store.state.author
+        // }
     },
 //       computed:{
 //          author(){

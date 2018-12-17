@@ -1,11 +1,11 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-Vue.use(Vuex)
-const store = new Vuex.Store({
-  // 定义状态
-  state: {
-    author: 'zhao xiaohang'
-  }
-})
+// import Vue from 'vue'
+// import Vuex from 'vuex'
+// Vue.use(Vuex)
+// const store = new Vuex.Store({
+//   // 定义状态
+//   state: {
+//     author: 'zhao xiaohang'
+//   }
+// })
 
-export default store
+// export default store
