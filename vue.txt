@@ -1,7 +1,7 @@
-´´½¨vuex
+åˆ›å»ºvuex
 1.npm install vuex --save
-2.´´½¨store.js
-store.jsÄÚÐ´
+2.åˆ›å»ºstore.js
+store.jså†…å†™
 import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex);
@@ -12,22 +12,22 @@ export const store= new Vuex.Store({
 })
 export default store
 
-3.main.jsÒýÈëstore.js 
-4.×é¼þÖÐthis.$stote.state.goodListµ÷ÓÃ
+3.main.jså¼•å…¥store.js 
+4.ç»„ä»¶ä¸­this.$stote.state.goodListè°ƒç”¨
 
-¸Ä±ästateÖÐµÄÖµ
-1.´´½¨
+æ”¹å˜stateä¸­çš„å€¼
+1.åˆ›å»º
 mutations:{
 	add:state=>{
 	state.goodSlist.name++
 	}
 	}
-2.ÔÚ×é¼þÖÐµ÷ÓÃthis.$store.commit('add');
-²»ÄÜÖ±½Óconsole.log(this.$store.commit('add'));×¢Òâ
-this.$store.commit("increment")ÊÇÖ´ÐÐ¹ý³Ì£¬this.$store.state.countÊÇÖ´ÐÐ½á¹û£¬ÔÚÇ°ÕßÖ´ÐÐÖ®ºó²ÅÄÜÖ´ÐÐºóÕß
-3. ...mapState([])Êý×éÐÎÊ½ Ö÷ÒªÊÇÓÃ×÷×é¼þÖÐ»ñÈ¡stateÖÐµÄÖµ£¬Èç¹û²»ÓÃÕâÖÖÐÎÊ½£¬¾ÍÐèÒªÖØ¸´return 
-×é¼þÖÐÊôÐÔ¼ÆËã£º
-mapStateÖ÷ÒªÊÇÎªÁË½â¾öthis.$store.state
+2.åœ¨ç»„ä»¶ä¸­è°ƒç”¨this.$store.commit('add');
+ä¸èƒ½ç›´æŽ¥console.log(this.$store.commit('add'));æ³¨æ„
+this.$store.commit("increment")æ˜¯æ‰§è¡Œè¿‡ç¨‹ï¼Œthis.$store.state.countæ˜¯æ‰§è¡Œç»“æžœï¼Œåœ¨å‰è€…æ‰§è¡Œä¹‹åŽæ‰èƒ½æ‰§è¡ŒåŽè€…
+3. ...mapState([])æ•°ç»„å½¢å¼ ä¸»è¦æ˜¯ç”¨ä½œç»„ä»¶ä¸­èŽ·å–stateä¸­çš„å€¼ï¼Œå¦‚æžœä¸ç”¨è¿™ç§å½¢å¼ï¼Œå°±éœ€è¦é‡å¤return 
+ç»„ä»¶ä¸­å±žæ€§è®¡ç®—ï¼š
+mapStateä¸»è¦æ˜¯ä¸ºäº†è§£å†³this.$store.state
 computed:{
         ...mapState([
          'count',//this.store.state.count
@@ -35,105 +35,106 @@ computed:{
         ]),
 	
 }
-×é¼þÖÐÒýÈë import {mapState,mapMutations} from "vuex";
-...mapMutationsÓÃ·¨
-1.ÏÈÒýÈëimport {mapState,mapMutations} from "vuex";
-2.ÔÚmethodsÀï±ß¶¨Òå 
+ç»„ä»¶ä¸­å¼•å…¥ import {mapState,mapMutations} from "vuex";
+...mapMutationsç”¨æ³•
+1.å…ˆå¼•å…¥import {mapState,mapMutations} from "vuex";
+2.åœ¨methodsé‡Œè¾¹å®šä¹‰ 
 methods:{
             ...mapMutations([
-                'increment' //vuexÀï±ß¶¨ÒåµÄº¯ÊýÃû
+                'increment' //vuexé‡Œè¾¹å®šä¹‰çš„å‡½æ•°å
             ])
 
         }
-¼ÙÈçÒª++ Ö±½ÓÔÚ@click='increment'
-Ò³ÃæÖÐ¸Ä±ästateÖÐµÄÖµÊ±£¬ÎÞÂÛÊÇmapMutations»¹ÊÇaction¡£¶¼ÐèÒª³ö·¢º¯Êý£¬º¯ÊýÃûÊÇvuexÖÐ¶¨ÒåµÄÃû×Ö
-mapMutationsÖ÷ÒªÊÇÎªÁË½â¾öthis.$store.commit('increment')µÄ
+mapState,mapGetterså®šä¹‰åœ¨computedè®¡ç®—å±žæ€§é‡Œè¾¹,actionå’Œmutationå®šä¹‰åœ¨methodsé‡Œè¾¹
+å‡å¦‚è¦++ ç›´æŽ¥åœ¨@click='increment'
+é¡µé¢ä¸­æ”¹å˜stateä¸­çš„å€¼æ—¶ï¼Œæ— è®ºæ˜¯mapMutationsè¿˜æ˜¯actionã€‚éƒ½éœ€è¦å‡ºå‘å‡½æ•°ï¼Œå‡½æ•°åæ˜¯vuexä¸­å®šä¹‰çš„åå­—
+mapMutationsä¸»è¦æ˜¯ä¸ºäº†è§£å†³this.$store.commit('increment')çš„
 
-GettreÓÃ·¨
-getterÏàµ±ÓÚvueµÄ¼ÆËãÊôÐÔ
-store.jsÀï±ß
+Gettreç”¨æ³•
+getterç›¸å½“äºŽvueçš„è®¡ç®—å±žæ€§
+store.jsé‡Œè¾¹
 getters:{
     done:state=>{
         return state.goodList.filter(todo=>todo.name)
     }  
-×é¼þÀï±ßÒýÈë import {mapState,mapMutations£¬mapGetters} from "vuex";
+ç»„ä»¶é‡Œè¾¹å¼•å…¥ import {mapState,mapMutationsï¼ŒmapGetters} from "vuex";
 computed:{
          ...mapGetters(['done'])
 }
 
-4.Â·ÓÉÀÁ¼ÓÔØ ÎªÁË½â¾öÊ×Ò³¼ÓÔØËÙ¶ÈÂý£¬°×ÆÁÎÊÌâ¡£
-Ð´·¨£ºÔÚrouter.js Àï±ßÐ´
+4.è·¯ç”±æ‡’åŠ è½½ ä¸ºäº†è§£å†³é¦–é¡µåŠ è½½é€Ÿåº¦æ…¢ï¼Œç™½å±é—®é¢˜ã€‚
+å†™æ³•ï¼šåœ¨router.js é‡Œè¾¹å†™
 path:''
 name:''
 component:resolve=>require(['@component/Home'],resolve),
-requreÌá¹©µÄ·½·¨Àï±ßµÚÒ»¸ö²ÎÊýÎªÊý×é£¬µÚ¶þ¸öÊÇ»Øµ÷º¯Êý Êý×éÀï±ßÊÇÒýÓÃµÄ×é¼þ£¬Èç¹ûÕâÀï±ßÒÑ¾­Ð´ÁËÂ·¾¶¾Í²»ÓÃimportÒýÈë×é¼þÁË
-×¢Òâ£ºÔËÓÃÁËÂ·ÓÉÀÁ¼ÓÔØ´ò°üÏîÄ¿ºóÔËÐÐhtml»á±¨´í£¬ÕÒµ½buildÏÂÃæµÄwebpack.prod.conf.js  outputÀï±ßÌí¼Ó   publicPath£º"./",£¬
-5.promiseÎªÁË½â¾ö»Øµ÷ÎÊÌâ£¬±ÈÈçËµÒ»¸öajaxÐèÒª»ñÈ¡ÉÏÒ»¸öajaxµÄ·µ»ØÖµ£¬Èç¹ûÇëÇó¹ý¶à¾Í»áÒ»Ö±»Øµ÷¡£
+requreæä¾›çš„æ–¹æ³•é‡Œè¾¹ç¬¬ä¸€ä¸ªå‚æ•°ä¸ºæ•°ç»„ï¼Œç¬¬äºŒä¸ªæ˜¯å›žè°ƒå‡½æ•° æ•°ç»„é‡Œè¾¹æ˜¯å¼•ç”¨çš„ç»„ä»¶ï¼Œå¦‚æžœè¿™é‡Œè¾¹å·²ç»å†™äº†è·¯å¾„å°±ä¸ç”¨importå¼•å…¥ç»„ä»¶äº†
+æ³¨æ„ï¼šè¿ç”¨äº†è·¯ç”±æ‡’åŠ è½½æ‰“åŒ…é¡¹ç›®åŽè¿è¡Œhtmlä¼šæŠ¥é”™ï¼Œæ‰¾åˆ°buildä¸‹é¢çš„webpack.prod.conf.js  outputé‡Œè¾¹æ·»åŠ    publicPathï¼š"./",ï¼Œ
+5.promiseä¸ºäº†è§£å†³å›žè°ƒé—®é¢˜ï¼Œæ¯”å¦‚è¯´ä¸€ä¸ªajaxéœ€è¦èŽ·å–ä¸Šä¸€ä¸ªajaxçš„è¿”å›žå€¼ï¼Œå¦‚æžœè¯·æ±‚è¿‡å¤šå°±ä¼šä¸€ç›´å›žè°ƒã€‚
 
-¶þ.vueÖÐslotÓÃ·¨
-1.Ò»°ã¶àÓÃÓÚ¸¸×Ó×é¼þÖ®¼ä´«Öµ
-ÔÚ×Ó×é¼þÖÐÊéÐ´<slot><slot>,Èç¹û¸¸×é¼þÒýÈëÁËÕâÒ»×Ó×é¼þ¡£<child><span>Õ¼Î»</span></child>£¬Èç¹û¸¸×é¼þÒýÈëµÄ×é¼þÖÐ»ªÊéÐ´ÁËÕâÒ»±êÇ©¡£ÄÇÃ´×Ó×é¼þÖÐslot±êÇ©ÖÐµÄÄÚÈÝ½«»á±»¸²¸Ç¡£µ«ÊÇ¾ßÃû²Û¿Ú²»»á±»¸²¸Ç
-µ±¸¸×é¼þÊéÐ´±êÇ©Ê±£¬²¢ÇÒ×Ó×é¼þÃ»ÓÐ¾ßÃû²Û¿ÚÊ±£¬×Ó×é¼þÖÐµÄÄÚÈÝ½«»á±»¸²¸Ç¡£
-2.×Ó×é¼þÐ´ÁË¾ßÃû²Û¿Ú£¬Èç¹û¸¸×é¼þÔÚÒýÓÃÁË¾ßÃû²Û¿ÚÊ±£¬×Ó×é¼þÄÚÈÝ±»¸²¸Ç
-3.×÷ÓÃÓÚ²å²Û
-Ê¹ÓÃÊ±ºò×Ó×é¼þ±êÇ©<Child>ÖÐÒªÓÐ<template scope=¡±scopeName¡±>±êÇ©£¬ÔÙÍ¨¹ýscopeName.childProp¾Í¿ÉÒÔµ÷ÓÃ×Ó×é¼þÄ£°åÖÐµÄchildProp°ó¶¨µÄÊý¾Ý£¬ËùÒÔ×÷ÓÃÓò²å²ÛÊÇÒ»ÖÖ×Ó´«¸¸´«²ÎµÄ·½Ê½£¬½â¾öÁËÆÕÍ¨slotÔÚparentÖÐÎÞ·¨·ÃÎÊchildÊý¾ÝµÄÈ¥ÎÊÌâ£»
-Èý.vue×é¼þÖ®¼äµÄ´«Öµ
-¸¸´«×Ó×é¼þÖ®¼ä´«ÖµÓÃprops
-1.×Ó×é¼þ¶¨ÒåÒ»¸ömesage props:['message']
-2.¸¸×é¼þ<child message="¹þ¹þ¹þ"></child>¾Í°Ñ¸¸×é¼þÖÐµÄ¹þ¹þ¹þ´«¸ø×Ó×é¼þÊ¹ÓÃ
-props´«µÝÐÅÏ¢ÊÇ£¬¿ÉÒÔÊÇÊý×éÐÎÊ½props:[]£¬µ±Ê¹ÓÃÊý×é·â×°propsµÄÊ±ºòÖ»ÊÇ¼òµ¥½«¸¸×é¼þµÄ²ÎÊý´«µÝ¸ø×Ó×é¼þÊ¹ÓÃ£¬´Ë´¦µÄ²ÎÊý¿ÉÒÔÊÇ¶ÔÏó£¬×Ö·û´®£¬numberÀàÐÍµÄÊý¾Ý Ò²¿ÉÒÔÊÇ¶ÔÏó·½Ê½props:{}¿ÉÒÔ¸ü¼Ó¸ß¼¶µÄÐ£Ñé²ÎÊý£¬±ÈÈç²ÎÊýÀàÐÍ£¬Ä¬ÈÏÖµ£¬²ÎÊý´óÐ¡µÈÒ»ÏµÁÐÐ£Ñé¡£µ±²»·ûºÏÊ±ºò£¬¿ÉÒÔ¿´µ½VueÔÙ¿ØÖÆÌ¨¸ø³ö´íÎó¾¯¸æ
-3.Èç¹û¸¸×é¼þÏò×Ó×é¼þ´«µÝÒ»¸öÊý×éÊ±,ÒªÓÃ<child :message=arr></child>,×Ó×é¼þÓÃprops:{message:{type:Array}}
-×Ó×é¼þÏò¸¸×é¼þ´«µÝÐÅÏ¢×Ô¶¨ÒåÊÂ¼þ$emit
-1.ÔÚ×Ó×é¼þÖÐ¶¨ÒåÒ»¸öµã»÷ÊÂ¼þ£¬@click="add"
-2.ÔÚ×Ó×é¼þ this.$emitÖÐ´«ÈëÁ½¸ö²ÎÊý£¬µÚÒ»¸öÊÇ×Ô¶¨ÒåµÄÊÂ¼þÃû³Æ£¬Õâ¸ö×Ô¶¨ÒåÊÂ¼þÒÔºóÒªÐ´ÔÚ¸¸×é¼þ
-<child @info='cc'></child>,µÚ¶þ¸ö²ÎÊýÊÇÒª´«µÝµÄÐÅÏ¢
+äºŒ.vueä¸­slotç”¨æ³•
+1.ä¸€èˆ¬å¤šç”¨äºŽçˆ¶å­ç»„ä»¶ä¹‹é—´ä¼ å€¼
+åœ¨å­ç»„ä»¶ä¸­ä¹¦å†™<slot><slot>,å¦‚æžœçˆ¶ç»„ä»¶å¼•å…¥äº†è¿™ä¸€å­ç»„ä»¶ã€‚<child><span>å ä½</span></child>ï¼Œå¦‚æžœçˆ¶ç»„ä»¶å¼•å…¥çš„ç»„ä»¶ä¸­åŽä¹¦å†™äº†è¿™ä¸€æ ‡ç­¾ã€‚é‚£ä¹ˆå­ç»„ä»¶ä¸­slotæ ‡ç­¾ä¸­çš„å†…å®¹å°†ä¼šè¢«è¦†ç›–ã€‚ä½†æ˜¯å…·åæ§½å£ä¸ä¼šè¢«è¦†ç›–
+å½“çˆ¶ç»„ä»¶ä¹¦å†™æ ‡ç­¾æ—¶ï¼Œå¹¶ä¸”å­ç»„ä»¶æ²¡æœ‰å…·åæ§½å£æ—¶ï¼Œå­ç»„ä»¶ä¸­çš„å†…å®¹å°†ä¼šè¢«è¦†ç›–ã€‚
+2.å­ç»„ä»¶å†™äº†å…·åæ§½å£ï¼Œå¦‚æžœçˆ¶ç»„ä»¶åœ¨å¼•ç”¨äº†å…·åæ§½å£æ—¶ï¼Œå­ç»„ä»¶å†…å®¹è¢«è¦†ç›–
+3.ä½œç”¨äºŽæ’æ§½
+ä½¿ç”¨æ—¶å€™å­ç»„ä»¶æ ‡ç­¾<Child>ä¸­è¦æœ‰<template scope=â€scopeNameâ€>æ ‡ç­¾ï¼Œå†é€šè¿‡scopeName.childPropå°±å¯ä»¥è°ƒç”¨å­ç»„ä»¶æ¨¡æ¿ä¸­çš„childPropç»‘å®šçš„æ•°æ®ï¼Œæ‰€ä»¥ä½œç”¨åŸŸæ’æ§½æ˜¯ä¸€ç§å­ä¼ çˆ¶ä¼ å‚çš„æ–¹å¼ï¼Œè§£å†³äº†æ™®é€šslotåœ¨parentä¸­æ— æ³•è®¿é—®childæ•°æ®çš„åŽ»é—®é¢˜ï¼›
+ä¸‰.vueç»„ä»¶ä¹‹é—´çš„ä¼ å€¼
+çˆ¶ä¼ å­ç»„ä»¶ä¹‹é—´ä¼ å€¼ç”¨props
+1.å­ç»„ä»¶å®šä¹‰ä¸€ä¸ªmesage props:['message']
+2.çˆ¶ç»„ä»¶<child message="å“ˆå“ˆå“ˆ"></child>å°±æŠŠçˆ¶ç»„ä»¶ä¸­çš„å“ˆå“ˆå“ˆä¼ ç»™å­ç»„ä»¶ä½¿ç”¨
+propsä¼ é€’ä¿¡æ¯æ˜¯ï¼Œå¯ä»¥æ˜¯æ•°ç»„å½¢å¼props:[]ï¼Œå½“ä½¿ç”¨æ•°ç»„å°è£…propsçš„æ—¶å€™åªæ˜¯ç®€å•å°†çˆ¶ç»„ä»¶çš„å‚æ•°ä¼ é€’ç»™å­ç»„ä»¶ä½¿ç”¨ï¼Œæ­¤å¤„çš„å‚æ•°å¯ä»¥æ˜¯å¯¹è±¡ï¼Œå­—ç¬¦ä¸²ï¼Œnumberç±»åž‹çš„æ•°æ® ä¹Ÿå¯ä»¥æ˜¯å¯¹è±¡æ–¹å¼props:{}å¯ä»¥æ›´åŠ é«˜çº§çš„æ ¡éªŒå‚æ•°ï¼Œæ¯”å¦‚å‚æ•°ç±»åž‹ï¼Œé»˜è®¤å€¼ï¼Œå‚æ•°å¤§å°ç­‰ä¸€ç³»åˆ—æ ¡éªŒã€‚å½“ä¸ç¬¦åˆæ—¶å€™ï¼Œå¯ä»¥çœ‹åˆ°Vueå†æŽ§åˆ¶å°ç»™å‡ºé”™è¯¯è­¦å‘Š
+3.å¦‚æžœçˆ¶ç»„ä»¶å‘å­ç»„ä»¶ä¼ é€’ä¸€ä¸ªæ•°ç»„æ—¶,è¦ç”¨<child :message=arr></child>,å­ç»„ä»¶ç”¨props:{message:{type:Array}}
+å­ç»„ä»¶å‘çˆ¶ç»„ä»¶ä¼ é€’ä¿¡æ¯è‡ªå®šä¹‰äº‹ä»¶$emit
+1.åœ¨å­ç»„ä»¶ä¸­å®šä¹‰ä¸€ä¸ªç‚¹å‡»äº‹ä»¶ï¼Œ@click="add"
+2.åœ¨å­ç»„ä»¶ this.$emitä¸­ä¼ å…¥ä¸¤ä¸ªå‚æ•°ï¼Œç¬¬ä¸€ä¸ªæ˜¯è‡ªå®šä¹‰çš„äº‹ä»¶åç§°ï¼Œè¿™ä¸ªè‡ªå®šä¹‰äº‹ä»¶ä»¥åŽè¦å†™åœ¨çˆ¶ç»„ä»¶
+<child @info='cc'></child>,ç¬¬äºŒä¸ªå‚æ•°æ˜¯è¦ä¼ é€’çš„ä¿¡æ¯
 methods:{
 	add(){
 	this.$emit('info',data)
 
 	}
 }
-3.¸¸×é¼þ½ÓÊÕ×Ó×é¼þÐÅÏ¢£¬Ê×ÏÈ¶¨Òå<child @info='cc'></child> infoÊÇ×Ó×é¼þ¶¨ÒåµÄÊÂ¼þÃû³Æ
-È»ºóÔÚ¸¸×é¼þ
+3.çˆ¶ç»„ä»¶æŽ¥æ”¶å­ç»„ä»¶ä¿¡æ¯ï¼Œé¦–å…ˆå®šä¹‰<child @info='cc'></child> infoæ˜¯å­ç»„ä»¶å®šä¹‰çš„äº‹ä»¶åç§°
+ç„¶åŽåœ¨çˆ¶ç»„ä»¶
 methods:{
 	cc(data){
-		console.log(data) //ÕâÀïµÄdata¾ÍÊÇ´«µÝµÄÐÅÏ¢
+		console.log(data) //è¿™é‡Œçš„dataå°±æ˜¯ä¼ é€’çš„ä¿¡æ¯
 	}
 }
-·Ç¸¸×Ó×é¼þÖ®¼äµÄ´«Öµ ÔÚ²»ÓÃvuexÇé¿öÏÂÓÃeventbusÖÐ¼ä´¦ÀíÆ÷  ÐèÒª¶¨Òå¸ö¹«¹²µÄ¹«¹²ÊµÀýÎÄ¼þbus.js£¬×÷ÎªÖÐ¼ä²Ö¿âÀ´´«Öµ
-1.ÏÈ½¨Á¢bus.js 
-bus.jsÀï±ßÊéÐ´
+éžçˆ¶å­ç»„ä»¶ä¹‹é—´çš„ä¼ å€¼ åœ¨ä¸ç”¨vuexæƒ…å†µä¸‹ç”¨eventbusä¸­é—´å¤„ç†å™¨  éœ€è¦å®šä¹‰ä¸ªå…¬å…±çš„å…¬å…±å®žä¾‹æ–‡ä»¶bus.jsï¼Œä½œä¸ºä¸­é—´ä»“åº“æ¥ä¼ å€¼
+1.å…ˆå»ºç«‹bus.js 
+bus.jsé‡Œè¾¹ä¹¦å†™
 import Vue from 'vue'
 export default new Vue()
-2.½¨Á¢a.vue
-Bus.$emit("val", this.arr);//·¢ËÍÐÅÏ¢µ½ÖÐÑë´¦ÀíÆ÷£¬µÚÒ»¸ö²ÎÊýÊÇ²ÎÊýÃû³Æ£¬µÚ¶þ¸öÊÇ´«µÝµÄ²ÎÊý
-3.½¨Á¢b.vue
- Bus.$on("val",(data)=>{//´Óbus.jsÈ¡Êý¾Ý
+2.å»ºç«‹a.vue
+Bus.$emit("val", this.arr);//å‘é€ä¿¡æ¯åˆ°ä¸­å¤®å¤„ç†å™¨ï¼Œç¬¬ä¸€ä¸ªå‚æ•°æ˜¯å‚æ•°åç§°ï¼Œç¬¬äºŒä¸ªæ˜¯ä¼ é€’çš„å‚æ•°
+3.å»ºç«‹b.vue
+ Bus.$on("val",(data)=>{//ä»Žbus.jså–æ•°æ®
                 //  var vm = this;
                 this.arrData = data;
                 console.log(this.arrData);
             });
 	
-vue×Ô¶¨ÒåÖ¸Áî
-directives:{//¸úmethodsÍ¬¼¶
-¡¡¡¡¡¡¡¡change:{
-¡¡¡¡¡¡¡¡¡¡¡¡bind:function(){},
-¡¡¡¡¡¡¡¡¡¡¡¡update:function(){},
-¡¡¡¡¡¡¡¡¡¡¡¡unbind:function(){}
-¡¡¡¡¡¡¡¡}
-¡¡¡¡}
-chaneÐ´ÔÚ±êÇ©ÄÚÊÇv-change
-bind Ö¸ÁîÔÚ°ó¶¨µ½ÔªËØÒªÖ´ÐÐµÄ²Ù×÷
-update Èç¹ûÔÚµ÷ÓÃÖ¸ÁîÊ±ºò£¬´«ÁË²ÎÊý£¬µ±²ÎÊý±ä»¯Ê±ºò£¬¾Í»áÖ´ÐÐupdateËùÖ¸¶¨µÄ·½·¨
-unbind ½â°óÒªÖ´ÐÐµÄ²Ù×÷
-changeÀï±ßµÄº¯ÊýÓÐÁ½¸ö²ÎÊý:
-Ò»¸öÊÇel£¬¶ÔÓ¦µÄÊÇµ÷ÓÃÖ¸ÁîµÄÔªËØ
-Ò»¸öbindings£¬ÊÇÒ»¸ö¶ÔÏó£ºname/rawName/value/oldValue...
+vueè‡ªå®šä¹‰æŒ‡ä»¤
+directives:{//è·ŸmethodsåŒçº§
+ã€€ã€€ã€€ã€€change:{
+ã€€ã€€ã€€ã€€ã€€ã€€bind:function(){},
+ã€€ã€€ã€€ã€€ã€€ã€€update:function(){},
+ã€€ã€€ã€€ã€€ã€€ã€€unbind:function(){}
+ã€€ã€€ã€€ã€€}
+ã€€ã€€}
+chaneå†™åœ¨æ ‡ç­¾å†…æ˜¯v-change
+bind æŒ‡ä»¤åœ¨ç»‘å®šåˆ°å…ƒç´ è¦æ‰§è¡Œçš„æ“ä½œ
+update å¦‚æžœåœ¨è°ƒç”¨æŒ‡ä»¤æ—¶å€™ï¼Œä¼ äº†å‚æ•°ï¼Œå½“å‚æ•°å˜åŒ–æ—¶å€™ï¼Œå°±ä¼šæ‰§è¡Œupdateæ‰€æŒ‡å®šçš„æ–¹æ³•
+unbind è§£ç»‘è¦æ‰§è¡Œçš„æ“ä½œ
+changeé‡Œè¾¹çš„å‡½æ•°æœ‰ä¸¤ä¸ªå‚æ•°:
+ä¸€ä¸ªæ˜¯elï¼Œå¯¹åº”çš„æ˜¯è°ƒç”¨æŒ‡ä»¤çš„å…ƒç´ 
+ä¸€ä¸ªbindingsï¼Œæ˜¯ä¸€ä¸ªå¯¹è±¡ï¼šname/rawName/value/oldValue...
 
 
-vue·â×°È«¾Öº¯Êý
-1.ÐÂ½¨common.jsÎÄ¼þ
-jsÎÄ¼þÀï±ßÐ´
+vueå°è£…å…¨å±€å‡½æ•°
+1.æ–°å»ºcommon.jsæ–‡ä»¶
+jsæ–‡ä»¶é‡Œè¾¹å†™
 exports.install =(Vue)=> {
     Vue.prototype.changnum =(n)=>{
       let num= n.toFixed(2);
@@ -141,8 +142,8 @@ exports.install =(Vue)=> {
       return num
     };
 };
-2.main.jsÒýÈëcommon.js
+2.main.jså¼•å…¥common.js
 import common from './common.js'
 Vue.use(common);
-3.Ö±½ÓÔÚ×é¼þÖÐ 
-this.changnum()µ÷ÓÃ
+3.ç›´æŽ¥åœ¨ç»„ä»¶ä¸­ 
+this.changnum()è°ƒç”¨
