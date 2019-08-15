@@ -1,3 +1,8 @@
+cli3.0版本创建项目
+vue create project//(项目名称)
+yarn add vuex //引入插件
+yarn serve //启动打开项目
+
 创建vuex
 1.npm install vuex --save
 2.创建store.js
