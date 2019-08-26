@@ -69,6 +69,14 @@ computed:{
          ...mapGetters(['done'])
 }
 
+action用法
+异步操作，在action中定义
+export const modifyAName=({commit}, name)=>{ // commit 提交；name即为点击后传递过来的参数
+        commit ('modify', name)
+}   
+modify是Mutation里边定义的方法，name是参数
+
+
 4.路由懒加载 为了解决首页加载速度慢，白屏问题。
 写法：在router.js 里边写
 path:''
@@ -98,7 +106,6 @@ props传递信息是，可以是数组形式props:[]，当使用数组封装prop
 methods:{
 	add(){
 	this.$emit('info',data)
-
 	}
 }
 3.父组件接收子组件信息，首先定义<child @info='cc'></child> info是子组件定义的事件名称
