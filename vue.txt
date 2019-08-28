@@ -173,3 +173,22 @@ import common from './common.js'
 Vue.use(common);
 3.直接在组件中 
 this.changnum()调用
+axios进行封装
+1.新建请求文件夹
+在import axios from 'axios'
+export const httprequest=(config)=>{
+    const instance=axios.create({
+        baseURL:'http://192.168.0.221:8026/',
+        timeout:5000
+    })
+  return instance(config)
+}
+2.在组件中import {httprequest} from '../network/request'
+ httprequest({
+           url:'Config/Dll/GetGroup'
+       }).then(res=>{
+           console.log(res.data.data)
+       })
+
+
+
